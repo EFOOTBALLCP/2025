@@ -237,7 +237,7 @@
                         
          <div id="group-stage-options">
                                     <label class="block text-sm font-medium text-pl-text">Number of Groups</label>
-                                    <input type="number" id="groups-count" required value="4" min="2" step="2"
+                                    <input type="number" id="groups-count" required value="4" min="1" step="1"
        
                                   class="mt-1 block w-full rounded-md border-pl-highlight/50 shadow-sm p-3 border focus:border-pl-highlight focus:ring-pl-highlight bg-pl-dark text-pl-text">
                                     <p id="group-stage-info" class="text-xs text-gray-400 mt-1">E.g., 4 groups for 16 teams.
@@ -914,10 +914,12 @@ Brentford : @asim
                 scheduleData = generateLeagueSchedule(teams, numRounds, startDateStr, matchesPerTeamPerDay);
             } else if (type === 'group_knockout') {
                 const groupsCount = parseInt(document.getElementById('groups-count').value);
-                if (teamsCount % groupsCount !== 0 || groupsCount < 2 || groupsCount % 2 !== 0) {
-                    showMessage('start-message', 'Teams must be evenly divisible by an even number of groups (min 2).', true);
-                    return;
-                }
+        // Original: if (teamsCount % groupsCount !== 0 || groupsCount < 2 || groupsCount % 2 !== 0) {
+// The Fix:
+if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)) {
+    showMessage('start-message', 'Teams must be evenly divisible by the number of groups. Group count must be 1, or an even number (2 or more).', true);
+    return;
+}
                 const knockoutResult = generateGroupKnockoutSchedule(teams, groupsCount, startDateStr);
                 scheduleData = knockoutResult.schedule;
                 groupsData = knockoutResult.groups;
