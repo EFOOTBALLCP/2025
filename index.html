@@ -385,7 +385,7 @@ Brentford : @asim
           
   
              <div id="top-scorers" class="bg-ucl-dark p-4 rounded-lg shadow-inner">
-                            <h4 class="font-bold text-white section-header-bg p-2 rounded-lg mb-3">Top Goalscorers (GF)</h4>
+                            <h4 class="font-bold text-white section-header-bg p-2 rounded-lg mb-3">GOLDEN BOOT🎖️</h4>
                             <ul id="scorers-list" class="space-y-1 text-ucl-text"></ul>
               
   
@@ -455,14 +455,55 @@ Brentford : @asim
             'Brighton & Hove Albion': 'https://crests.football-data.org/397.png',
             'Aston Villa': 'https://crests.football-data.org/58.png',
             'Brentford': 'https://crests.football-data.org/404.png',
+        'Real Madrid': 'https://crests.football-data.org/86.png',
+            'Barcelona': 'https://crests.football-data.org/81.png',
+            'PSG': 'https://crests.football-data.org/524.png',
+            'Paris Saint-Germain': 'https://crests.football-data.org/524.png',
+            'Bayern Munich': 'https://crests.football-data.org/5.png',
+            'Juventus': 'https://crests.football-data.org/108.png',
+            'Inter Milan': 'https://crests.football-data.org/108.png',
+            'AC Milan': 'https://crests.football-data.org/98.png',
+            'Al Nassr': 'https://upload.wikimedia.org/wikipedia/en/2/20/Al-Nassr_FC_logo.svg',
+            'Inter Miami': 'https://upload.wikimedia.org/wikipedia/en/1/1c/Inter_Miami_CF_logo.svg',
+            'Bayer Leverkusen': 'https://crests.football-data.org/11.png',
+            'Dortmund': 'https://crests.football-data.org/4.png'
         };
-        const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
-            const logoUrl = TEAM_LOGOS[teamName];
-            if (logoUrl) {
-                return `<img src="${logoUrl}" alt="${teamName} Logo" class="${sizeClass} object-contain mr-2">`;
-            }
-            return '';
+
+        // --- UPDATED SMART LOGO LOGIC ---
+const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
+    // 1. Check your manual list first (for the 16 PL teams)
+    let logoUrl = TEAM_LOGOS[teamName];
+
+    // 2. If not in the list, try to guess if it's a National Team (Flag API)
+    if (!logoUrl) {
+        // Map common country names to codes for the Flag API
+        const countryCodes = {
+            'Brazil': 'BR', 'Argentina': 'AR', 'France': 'FR', 'Germany': 'DE', 
+            'Portugal': 'PT', 'Spain': 'ES', 'Italy': 'IT', 'England': 'GB',
+            'Morocco': 'MA', 'Japan': 'JP', 'Nigeria': 'NG', 'Pakistan': 'PK'
+        };
+        
+        const code = countryCodes[teamName];
+        if (code) {
+            logoUrl = `https://flagsapi.com/${code}/flat/64.png`;
         }
+    }
+
+    // 3. If still not found, search the Football Database (TheSportsDB)
+    // Most professional clubs can be found by their name in this URL format
+    if (!logoUrl) {
+        const formattedName = teamName.replace(/\s+/g, '_'); // Replace spaces with underscores
+        logoUrl = `https://www.thesportsdb.com/images/media/team/badge/small/${formattedName}.png`;
+    }
+
+    // Return the image with a fallback "Placeholder" if the link fails
+    return `
+        <img src="${logoUrl}" 
+             alt="${teamName}" 
+             class="${sizeClass} object-contain mr-2" 
+             onerror="this.src='https://cdn-icons-png.flaticon.com/512/53/53254.png'; this.onerror=null;">
+    `;
+};
         
         // --- UTILITY FUNCTIONS ---
         
