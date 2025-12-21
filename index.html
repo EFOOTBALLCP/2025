@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
     <title>EFOOTBALL CHAMPIONSHIP BY SALMAN SYED</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght400;600;700;900&dishttps:/bg-ucl/upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/100px-}Premier_League_Logo.svg.pngplay=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+            <script src="https://unpkg.com/@phosphor-icons/web"></script>
  
     <script>
         // Custom Tailwind config for Premier League colors
@@ -25,14 +26,34 @@ tailwind.config = {
                 'ucl-accent': '#cc',  // Cyan/Electric Blue (Highlights)
                 'ucl-text': '#00FFCC',    // White text
                 'ucl-highlight': '#005fcc', // Bright blue for buttons
-                'ucl-header-bar': 'linear-gradient(90deg, #87CEEB 0%, #005fcc 100%)', 
-            }
+                'ucl-header-bar': 'linear-gradient(90deg, #87CEEB 0%, #005fcc 100%)',
+                'news-strip-container': 'linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)',
+   }
         }
     }
 }
     </script>
     
     <style>
+
+/* Add this inside your existing <style> tag */
+@keyframes news-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.news-scroller {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: news-scroll 20s linear infinite; /* Adjust 20s for speed */
+}
+
+/* Optional: Pause scrolling when someone hovers over it */
+.news-scroller:hover {
+    animation-play-state: paused;
+}
+
         body { font-family: 'Inter', sans-serif;
  }
         .custom-scrollbar::-webkit-scrollbar { width: 8px;
@@ -157,6 +178,19 @@ b8b; border-radius: 4px;
              </div>
             </div>
         </nav>
+
+<div id="news-strip-container" class="fixed bottom-0 left-0 right-0 bg-[#87ceeb] text-white py-2 px-4 shadow-lg z-[50] hidden border-t border-ucl-highlight/30">
+    <div class="max-w-5xl mx-auto flex items-center overflow-hidden">
+        <span class="font-bold whitespace-nowrap mr-4 uppercase tracking-wider text-[10px] bg-white text-[#001c4d] px-2 py-0.5 rounded shadow-sm z-10">
+            LATEST NEWS
+        </span>
+        
+        <div class="flex-1 overflow-hidden relative">
+            <div id="news-text" class="news-scroller text-sm font-bold italic text-[#FFFFFF]">
+                </div>
+        </div>
+    </div>
+</div>
 
         <div id="tab-content" class="space-y-6">
 
@@ -317,6 +351,36 @@ Brentford : @asim
             
       
             </button>
+
+<div class="mt-8 border-t border-ucl-highlight/20 pt-6">
+        <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
+            <i class="ph-bold ph-megaphone text-2xl mr-2 text-ucl-highlight"></i> Post Tournament News
+        </h3>
+        <div class="space-y-3">
+            <textarea id="admin-news-input" placeholder="Type news here (e.g., 'Final match scheduled for 8 PM!')" 
+                class="block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border bg-ucl-dark text-ucl-text h-24"></textarea>
+            <button id="publish-news-btn" class="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-150 flex items-center justify-center">
+                <i class="ph-bold ph-paper-plane-tilt text-xl mr-2"></i> PUBLISH NEWS
+            </button>
+            <button id="clear-news-btn" class="w-full px-4 py-2 bg-red-600/20 text-red-400 border border-red-600/50 font-semibold rounded-lg hover:bg-red-600 hover:text-white transition duration-150">
+                Clear News Strip
+            </button>
+        </div>
+    </div>
+
+
+<div class="mt-6 border-t border-ucl-highlight/20 pt-6">
+        <label class="block text-sm font-medium text-ucl-text mb-2">Update Tournament News</label>
+        <div class="flex gap-2">
+            <input type="text" id="admin-news-input" placeholder="Type tournament news here..." 
+                class="flex-1 rounded-md border-ucl-highlight/50 shadow-sm p-3 border bg-ucl-dark text-ucl-text">
+            <button id="save-news-btn" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
+                Post News
+            </button>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">This will appear at the bottom of Fixtures, Points, and Stats tabs.</p>
+    </div>
+
                             <div id="start-message" class="text-sm mt-2 text-center text-ucl-highlight"></div>
                     
      </form>
@@ -434,6 +498,29 @@ Brentford : @asim
         let currentTab = 'fixtures';
         let tournamentData = null; // Stores latest tournament data
         let activeGroup = null; // NEW: Global variable to track active group tab for fixtures
+
+// News logic
+        const saveNewsToDatabase = () => {
+            const newsContent = document.getElementById('admin-news-input').value;
+            database.ref('tournament/news').set(newsContent);
+            showMessage('start-message', 'News updated successfully!', false);
+        };
+
+// Location: Replace the function at line 316
+const renderNewsStrip = (news) => {
+    const container = document.getElementById('news-strip-container');
+    const newsText = document.getElementById('news-text');
+    
+    const visibleTabs = ['fixtures', 'points', 'stats'];
+    
+    if (news && news.trim() !== "" && visibleTabs.includes(currentTab)) {
+        // We use innerHTML to ensure the animation resets when news changes
+        newsText.innerHTML = news; 
+        container.classList.remove('hidden');
+    } else {
+        container.classList.add('hidden');
+    }
+};
 
         // --- TEAM LOGO MAPPING ---
         const TEAM_LOGOS = {
@@ -999,6 +1086,9 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 console.error("Error saving tournament data:", error);
                 showMessage('start-message', 'Failed to save tournament data. Check console.', true);
             }
+
+// Trigger news visibility check on tab switch
+            database.ref('tournament/news').once('value', snapshot => renderNewsStrip(snapshot.val()));
         };
 
         // --- TOURNAMENT MANAGEMENT & RESULT UPDATING ---
@@ -1765,10 +1855,46 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 console.error("Realtime database error:", error);
                 alert("Could not connect to the database. Check console.");
             });
+// Add this inside setupRealtimeListener
+        database.ref('tournament/news').on('value', (snapshot) => {
+            renderNewsStrip(snapshot.val());
+        });
+
+        // Add this inside initializeApp
+        document.getElementById('save-news-btn').addEventListener('click', saveNewsToDatabase);
         };
         // --- START APP ---
         initializeApp();
-        setupRealtimeListener();
+        // News Event Listeners
+            document.getElementById('publish-news-btn').addEventListener('click', () => {
+                const newsText = document.getElementById('admin-news-input').value.trim();
+                if (newsText) {
+                    database.ref('tournament/news').set(newsText);
+                    showMessage('start-message', 'News Published!', false);
+                    document.getElementById('admin-news-input').value = '';
+                } else {
+                    showMessage('start-message', 'Please enter some news text first.', true);
+                }
+            });
+
+            document.getElementById('clear-news-btn').addEventListener('click', () => {
+                database.ref('tournament/news').remove();
+                showMessage('start-message', 'News strip cleared.', false);
+            });
+       setupRealtimeListener();
+// Listen for news updates
+        database.ref('tournament/news').on('value', (snapshot) => {
+            const news = snapshot.val();
+            const container = document.getElementById('news-strip-container');
+            const textElement = document.getElementById('news-text');
+            
+            if (news && news.trim() !== "") {
+                textElement.textContent = news;
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        });
 
     </script>
 </body>
