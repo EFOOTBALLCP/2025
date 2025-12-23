@@ -4,323 +4,484 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
-<meta name="" EFOOTBALL TOURNAMENT BY SALMAN SYED"" 
-    content=""Join the ultimate Efootball Championship!
- View live brackets, register your team, and follow all the results for the 2025 season."">
+    <meta name="description" content="Join the ultimate Efootball Championship! View live brackets, register your team, and follow all the results for the 2025 season.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EFOOTBALL CHAMPIONSHIP BY SALMAN SYED</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght400;600;700;900&dishttps:/bg-ucl/upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/100px-}Premier_League_Logo.svg.pngplay=swap" rel="stylesheet">
-            <script src="https://unpkg.com/@phosphor-icons/web"></script>
- 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <script>
-        // Custom Tailwind config for Premier League colors
-        // Replace the existing tailwind.config section
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                'ucl-dark': '#001c4d',    // Deep Midnight Blue (Background)
-                'ucl-card': '#002b70',    // Slightly lighter blue (Cards)
-                'ucl-accent': '#cc',  // Cyan/Electric Blue (Highlights)
-                'ucl-text': '#00FFCC',    // White text
-                'ucl-highlight': '#005fcc', // Bright blue for buttons
-                'ucl-header-bar': 'linear-gradient(90deg, #87CEEB 0%, #005fcc 100%)',
-                'news-strip-container': 'linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%)',
-   }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0a1a3a',
+                        'secondary': '#1e2b4d',
+                        'accent': '#3b82f6',
+                        'accent-dark': '#1d4ed8',
+                        'success': '#10b981',
+                        'warning': '#f59e0b',
+                        'danger': '#ef4444',
+                        'light': '#f8fafc',
+                        'dark': '#0f172a',
+                        'surface': '#1e293b',
+                        'card': '#334155'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.7s ease-out'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
         }
-    }
-}
     </script>
     
     <style>
-
-/* Add this inside your existing <style> tag */
-@keyframes news-scroll {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-.news-scroller {
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 100%;
-    animation: news-scroll 20s linear infinite; /* Adjust 20s for speed */
-}
-
-/* Optional: Pause scrolling when someone hovers over it */
-.news-scroller:hover {
-    animation-play-state: paused;
-}
-
-        body { font-family: 'Inter', sans-serif;
- }
-        .custom-scrollbar::-webkit-scrollbar { width: 8px;
- }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: 
-b8b; border-radius: 4px;
- }
-        .custom-scrollbar::-webkit-scrollbar-track { background-color: #1a0d1e;
- }
- 
-        .tab-button {
-            transition: all 0.3s ease;
- cursor: pointer;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a1a3a 0%, #1e2b4d 100%);
+            min-height: 100vh;
         }
-
-        /* --- STYLES TO ENSURE ALL HEADERS ARE WHITE --- */
-        .tab-pane h2, .tab-pane h3, .tab-pane h4 {
-            /* This ensures any text inside the headers remains white for contrast */
-            color: white !important;
- }
-
-        /* --- NEW STYLES FOR MAIN HEADER BACKGROUND --- */
-      /* Update these in your <style> section */
-.custom-header-bg, .section-header-bg {
-    background: linear-gradient(135deg, #87CEEB 0%, #005fcc 100%);
-    border-bottom: 2px solid #; /* Cyan border */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #cc; /* Cyan scrollbar */
-}
         
-        /* --- NEW CLASS FOR SECTION HEADERS (H2, H3, H4) --- */
-        .section-header-bg {
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_UEFA_Champions_League.png');
- background-size: cover;
-            background-position: center;
-            background-color: '#37003C'; /* Fallback */
-            border-bottom: 2px solid #87CEEB;
- 
-
-
-        /* --- SPLASH SCREEN STYLE --- */
-        .el-clasico-bg {
-            /* IMPORTANT: THIS IS THE BANNER IMAGE FROM THE PREVIOUS REQUEST */
-            background-image: url('https://i.postimg.cc/8CHzmMmG/blue-maximalist-champions-league-match-poste-design-template-bb5652a20fca757eda4fb4ac752394c2-4f36fe.png');
- background-size: cover;
-            background-position: center;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .el-clasico-bg::before {
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .section-header {
+            background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header::after {
             content: '';
- position: absolute;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+        }
+        
+        .match-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .match-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-left-color: #3b82f6;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-primary {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        .news-ticker {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        .news-ticker::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, #1e40af, transparent);
+            z-index: 2;
+        }
+        
+        .news-ticker::after {
+            content: '';
+            position: absolute;
+            top: 0;
             right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
- /* Darker overlay */
-            z-index: -1;
- }
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #1e40af);
+            z-index: 2;
+        }
+        
+        .news-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        
+        .news-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .tab-active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .score-input {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .score-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            outline: none;
+        }
+        
+        .stat-input {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            outline: none;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+        
+        .splash-screen {
+            background: linear-gradient(135deg, #0a1a3a 0%, #1e2b4d 100%);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+            animation: pulse-slow 2s infinite;
+        }
+        
+        .knockout-match {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .group-match {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .league-match {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+            border: 2px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        .rank-1 {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.2) 0%, rgba(234, 179, 8, 0.2) 100%);
+            border-left: 4px solid #facc15;
+        }
+        
+        .rank-2 {
+            background: linear-gradient(135deg, rgba(209, 213, 219, 0.2) 0%, rgba(156, 163, 175, 0.2) 100%);
+            border-left: 4px solid #d1d5db;
+        }
+        
+        .rank-3 {
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.2) 0%, rgba(146, 64, 14, 0.2) 100%);
+            border-left: 4px solid #b45309;
+        }
+        
+        .loading-shimmer {
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
     </style>
 </head>
-<body class="bg-ucl-dark min-h-screen text-ucl-text">
+<body class="text-light min-h-screen">
 
-    <div id="splash-screen" class="fixed inset-0 el-clasico-bg flex items-center justify-center z-[100] transition-opacity duration-1000">
-        <div class="text-center p-8 rounded-xl bg-black bg-opacity-70 shadow-2xl relative z-10">
-            <img src="https://i.postimg.cc/yx6W4y1k/images.png" 
-                 alt="Premier League Logo" 
-                 class="w-20 h-20 mx-auto text-ucl-highlight animate-pulse filter drop-shadow-lg"
-      
-            style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-            
-            <h1 class="text-6xl font-black text-white mt-4 tracking-widest">ECL</h1>
-            <h2 class="text-2xl font-semibold text-ucl-highlight mt-2">EFOOTBALL CHAMPIONSHIP</h2>
-            <p 
- class="text-md text-gray-300 mt-6">ORGANIZED BY SALMAN SYED</p>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="fixed inset-0 splash-screen flex items-center justify-center z-50">
+        <div class="text-center animate-fade-in">
+            <div class="logo-glow mb-6">
+                <i class="ph ph-soccer-ball text-6xl text-accent"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-white mb-2">EFOOTBALL CHAMPIONSHIP</h1>
+            <div class="w-32 h-1 bg-accent mx-auto mb-4 rounded-full"></div>
+            <p class="text-lg text-gray-300">Powered by Salman Syed</p>
+            <div class="mt-8 flex justify-center space-x-2">
+                <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                <div class="w-2 h-2 bg-accent rounded-full animate-pulse delay-75"></div>
+                <div class="w-2 h-2 bg-accent rounded-full animate-pulse delay-150"></div>
+            </div>
         </div>
     </div>
 
-    <div id="main-app" 
- class="hidden max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Main App -->
+    <div id="main-app" class="hidden max-w-7xl mx-auto p-4 lg:p-6">
         
-        <header class="flex flex-col sm:flex-row justify-between items-center custom-header-bg p-4 rounded-xl shadow-lg mb-6 sticky top-4 z-40 text-white">
-            <h1 class="text-2xl sm:text-3xl font-bold flex items-center">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_UEFA_Champions_League.png" 
-                     alt="PL Logo" 
-       
-               class="w-8 h-8 mr-2 filter drop-shadow-lg"
-                     style="filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);">
-
-                <span>ECL BY SALMAN SYED</span>
-            </h1>
-            <div id="auth-status" class="text-sm mt-2 sm:mt-0 text-ucl-text flex items-center">
-     
-            <i id="user-icon" class="ph-bold ph-user-circle text-xl mr-1 text-ucl-text"></i>
-                <span id="user-display">Guest</span>
-        
-  </div>
+        <!-- Header -->
+        <header class="glass-effect rounded-2xl p-6 mb-6 shadow-xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <div class="gradient-bg p-3 rounded-xl mr-4">
+                        <i class="ph ph-trophy text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">EFOOTBALL CHAMPIONSHIP</h1>
+                        <p class="text-gray-400">Season 2025 • Organized by Salman Syed</p>
+                    </div>
+                </div>
+                <div id="auth-status" class="flex items-center space-x-3">
+                    <div class="glass-effect px-4 py-2 rounded-lg">
+                        <div class="flex items-center">
+                            <i id="user-icon" class="ph ph-user-circle text-xl text-accent mr-2"></i>
+                            <span id="user-display" class="font-medium">Guest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <nav class="bg-ucl-header-bar p-1 rounded-xl shadow-md mb-6 sticky top-[80px] z-30">
-            <div class="flex flex-wrap justify-around text-center">
-                
- <div data-tab="admin" class="tab-button flex-1 py-3 px-2 rounded-lg text-white font-semibold text-sm sm:text-base border-2 border-transparent">
-                    <i class="ph-bold ph-lock mr-1"></i> ADMIN
-   
-          </div>
-                <div data-tab="fixtures" class="tab-button flex-1 py-3 px-2 rounded-lg text-white font-semibold text-sm sm:text-base border-2 border-transparent">
-                    <i class="ph-bold ph-calendar-blank 
- mr-1"></i> FIXTURES
-                </div>
-                <div 
- data-tab="points" class="tab-button flex-1 py-3 px-2 
- rounded-lg text-white font-semibold text-sm sm:text-base border-2 border-transparent">
-                    <i class="ph-bold ph-table mr-1"></i> POINTS TABLE
-                </div>
-            
-     <div data-tab="stats" class="tab-button flex-1 py-3 px-2 rounded-lg text-white font-semibold text-sm sm:text-base border-2 border-transparent">
-                    <i class="ph-bold ph-chart-bar 
- mr-1"></i> STATS
-     
-             </div>
+        <!-- Navigation -->
+        <nav class="glass-effect rounded-2xl p-1 mb-6">
+            <div class="flex flex-wrap">
+                <button data-tab="admin" class="tab-button flex-1 py-3 px-4 rounded-xl m-1 font-semibold transition-all duration-300">
+                    <i class="ph ph-lock mr-2"></i> ADMIN
+                </button>
+                <button data-tab="fixtures" class="tab-button flex-1 py-3 px-4 rounded-xl m-1 font-semibold transition-all duration-300 tab-active">
+                    <i class="ph ph-calendar mr-2"></i> FIXTURES
+                </button>
+                <button data-tab="points" class="tab-button flex-1 py-3 px-4 rounded-xl m-1 font-semibold transition-all duration-300">
+                    <i class="ph ph-table mr-2"></i> STANDINGS
+                </button>
+                <button data-tab="stats" class="tab-button flex-1 py-3 px-4 rounded-xl m-1 font-semibold transition-all duration-300">
+                    <i class="ph ph-chart-bar mr-2"></i> STATS
+                </button>
             </div>
         </nav>
 
-<div id="news-strip-container" class="fixed bottom-0 left-0 right-0 bg-[#87ceeb] text-white py-2 px-4 shadow-lg z-[50] hidden border-t border-ucl-highlight/30">
-    <div class="max-w-5xl mx-auto flex items-center overflow-hidden">
-        <span class="font-bold whitespace-nowrap mr-4 uppercase tracking-wider text-[10px] bg-white text-[#001c4d] px-2 py-0.5 rounded shadow-sm z-10">
-            LATEST NEWS
-        </span>
-        
-        <div class="flex-1 overflow-hidden relative">
-            <div id="news-text" class="news-scroller text-sm font-bold italic text-[#FFFFFF]">
+        <!-- News Ticker -->
+        <div id="news-ticker" class="news-ticker rounded-xl mb-6 py-3 hidden">
+            <div class="relative overflow-hidden">
+                <div class="news-content text-white font-semibold text-sm px-4">
+                    <span class="mr-8">⚽ Welcome to EFOOTBALL CHAMPIONSHIP 2025!</span>
+                    <span class="mr-8">🏆 Tournament organized by Salman Syed</span>
+                    <span class="mr-8">📅 Matches updated in real-time</span>
+                    <span class="mr-8">🎯 Follow your favorite teams and players</span>
                 </div>
+            </div>
         </div>
-    </div>
-</div>
 
+        <!-- Tab Content -->
         <div id="tab-content" class="space-y-6">
-
-           
- <div id="admin" class="tab-pane space-y-6 hidden">
-                <div id="admin-auth-panel" class="bg-ucl-card p-6 rounded-xl shadow-md">
-              
-       <h2 class="text-2xl font-semibold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-                        <i class="ph-bold ph-lock-key text-2xl mr-2 text-ucl-highlight"></i> Admin Access
-             
-        </h2>
-                    <form id="admin-auth-form" class="space-y-3">
             
-    <input type="password" id="admin-password" placeholder="Enter Admin Password" required
-                            class="block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border focus:border-ucl-highlight focus:ring-ucl-highlight -dark text-ucl-text">
-           
-              <button type="submit"
+            <!-- Admin Tab -->
+            <div id="admin" class="tab-pane space-y-6 hidden">
+                <!-- Admin Auth -->
+                <div id="admin-auth-panel" class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg p-3 rounded-lg mr-4">
+                            <i class="ph ph-lock-key text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Admin Access</h2>
+                            <p class="text-gray-400">Enter password to unlock admin features</p>
+                        </div>
+                    </div>
                     
-         class="w-full px-4 
- py-2 bg-ucl-highlight text-white font-semibold rounded-lg shadow-md hover:bg-ucl-highlight/80 transition duration-150">
-                            Unlock Admin Panel
-                
-         </button>
-                        <div id="admin-auth-message" class="text-sm 
- mt-2 text-center text-ucl-highlight"></div>
-         
-            </form>
+                    <form id="admin-auth-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Admin Password</label>
+                            <input type="password" id="admin-password" placeholder="Enter admin password" required
+                                class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                        </div>
+                        <button type="submit"
+                            class="w-full gradient-bg text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center">
+                            <i class="ph ph-key mr-2"></i> Unlock Admin Panel
+                        </button>
+                        <div id="admin-auth-message" class="text-sm text-center mt-2"></div>
+                    </form>
                 </div>
 
+                <!-- Admin Panel (Hidden Initially) -->
                 <div id="admin-panel" class="space-y-6 hidden">
-      
-               
-                    <div class="bg-ucl-card 
- p-6 rounded-xl shadow-md">
-          
-               <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-                           
-  <i class="ph-bold ph-calendar-check mr-2 text-ucl-highlight"></i> Organize Ongoing Tournaments
-                        </h3>
-       
-     <div id="current-tournament-status" class="space-y-4">
-                            <div class="text-center py-6 text-ucl-text">Loading tournament status...</div>
-                     
-    </div>
+                    <!-- Tournament Management -->
+                    <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-success/20 p-3 rounded-lg mr-4">
+                                <i class="ph ph-tournament text-2xl text-success"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Tournament Management</h3>
+                                <p class="text-gray-400">View and manage current tournament</p>
+                            </div>
+                        </div>
+                        
+                        <div id="current-tournament-status" class="space-y-4">
+                            <div class="text-center py-8">
+                                <div class="loading-shimmer h-4 w-48 mx-auto mb-2 rounded"></div>
+                                <div class="loading-shimmer h-4 w-32 mx-auto rounded"></div>
+                            </div>
+                        </div>
                     </div>
 
-
-   
-    <div class="bg-ucl-card p-6 rounded-xl shadow-md">
-                        <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg mb-4">Start New Tournament</h3>
-                        <form id="start-tournament-form" class="space-y-4">
-       
-                             
+                    <!-- Start New Tournament -->
+                    <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-warning/20 p-3 rounded-lg mr-4">
+                                <i class="ph ph-plus-circle text-2xl text-warning"></i>
+                            </div>
                             <div>
-                                <label class="block text-sm font-medium text-ucl-text">Tournament Type</label>
-              
-                   <select id="tournament-type"
-                                    class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-                                  
-   <option value="league">League Tournament (Full Round Robin)</option>
-                                    <option value="group_knockout">Group Stage & Knockout</option>
-                                </select>
-                     
-        </div>
-
-                    
-         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-   
-                              <div id="league-rounds-container">
-                          
-           <label class="block text-sm font-medium text-ucl-text">Matches Per Team (League Rounds)</label>
-             
-        <input type="number" id="num-rounds" required value="2" min="1"
-                                        class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-     
-                  
-               <p class="text-xs text-gray-400 
- mt-1">Total rounds will be (Teams - 1) * N (e.g., set to 1 for single round robin)</p>
-                                </div>
+                                <h3 class="text-xl font-bold text-white">Start New Tournament</h3>
+                                <p class="text-gray-400">Create and configure a new tournament</p>
+                            </div>
+                        </div>
                         
-         <div id="group-stage-options">
-                                    <label class="block text-sm font-medium text-ucll-text">Number of Groups</label>
-                                    <input type="number" id="groups-count" required value="4" min="1" step="1"
-       
-                                  class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-                                    <p id="group-stage-info" class="text-xs text-gray-400 mt-1">E.g., 4 groups for 16 teams.
- Must be an even number.</p>
+                        <form id="start-tournament-form" class="space-y-6">
+                            <!-- Tournament Type -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Tournament Type</label>
+                                    <select id="tournament-type"
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                        <option value="league">League Tournament</option>
+                                        <option value="group_knockout">Group Stage & Knockout</option>
+                                    </select>
                                 </div>
+                                
                                 <div>
-          
-         <label class="block text-sm font-medium text-ucl-text">Teams Count (Even, min 4)</label>
-     
-                                <input type="number" id="teams-count" required value="16" min="4" step="2"
-                       
-                  class="mt-1 block 
- w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border 
- focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-          
-                       </div>
-                                <div>
-         
-                     
-        <label class="block text-sm font-medium text-ucl-text">Tournament Start Date</label>
-  
-                                   <input type="date" id="start-date" required
-                           
-              class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border 
- focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-          
-                       </div>
-                                <div id="matches-per-day-container">
-             
-                       
-  <label class="block text-sm font-medium text-ucl-text">Matches Per Team 
- Per Day</label>
-                                    <input type="number" id="matches-per-day" required value="1" min="1"
-                           
-              class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
-     
- 
-                                 </div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Teams Count</label>
+                                    <input type="number" id="teams-count" required value="16" min="4" step="2"
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                </div>
                             </div>
 
-             
-                <label class="block text-sm font-medium text-ucl-text pt-2">Team & Player Assignment (Team name : 
- Player Name)</label>
-    
-                         <textarea id="teams-and-players" rows="16" required
-                                class="mt-1 block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border 
-focus:border-ucl-highlight focus:ring-ucl-highlight bg-ucl-dark text-ucl-text">
+                            <!-- Tournament Configuration -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div id="league-rounds-container">
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Matches Per Team</label>
+                                    <input type="number" id="num-rounds" required value="2" min="1"
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                </div>
+                                
+                                <div id="group-stage-options" class="hidden">
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Number of Groups</label>
+                                    <input type="number" id="groups-count" required value="4" min="2" step="1"
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Start Date</label>
+                                    <input type="date" id="start-date" required
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                </div>
+                                
+                                <div id="matches-per-day-container">
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Matches Per Day</label>
+                                    <input type="number" id="matches-per-day" required value="1" min="1"
+                                        class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300">
+                                </div>
+                            </div>
+
+                            <!-- Teams and Players -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">
+                                    Team & Player Assignment <span class="text-gray-500">(Team Name : Player Name)</span>
+                                </label>
+                                <textarea id="teams-and-players" rows="12" required
+                                    class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300 custom-scrollbar">
 Manchester United : @~Sonofsardar
 Manchester City : @~Sayed Maroof Shah
 Liverpool : @~Asad Ullah
@@ -328,8 +489,7 @@ Chelsea : @~Abdul Hamid Thoba
 Tottenham Hotspur : @~An
 Arsenal : @~Hassan Ahad
 Fulham : @⁨~SwordFish⁩
-Nottingham 
- Forest : Muazam😒
+Nottingham Forest : Muazam😒
 AFC Bournemouth : @⁨~Muhammad Yousuf⁩
 Crystal Palace : @⁨CADET SYED 😎⁩
 Wolverhampton Wanderers : @~Muhammad Amjad
@@ -337,147 +497,222 @@ Sunderland : @sanaullah
 Newcastle United : @~ khan
 Brighton & Hove Albion : @~Imadkhan
 Aston Villa : @~SIKANDAR SHAMS
-Brentford : @asim
-</textarea>
-                            <p class="text-xs text-gray-400">Ensure the number of lines matches 
- the Teams Count above.</p>
+Brentford : @asim</textarea>
+                                <p class="text-sm text-gray-500 mt-2">Ensure number of teams matches the Teams Count above.</p>
+                            </div>
 
+                            <!-- Start Button -->
+                            <button type="submit"
+                                class="w-full gradient-bg text-white font-semibold py-4 rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center text-lg">
+                                <i class="ph ph-rocket-launch text-xl mr-3"></i> GENERATE FIXTURES & START TOURNAMENT
+                            </button>
                             
- <button type="submit"
-  
-                               class="w-full px-4 py-3 bg-ucl-highlight text-white font-semibold rounded-lg shadow-md hover:bg-ucl-highlight/80 transition duration-150 flex items-center justify-center">
-                      
-           <i class="ph-bold ph-calendar-plus text-xl mr-2"></i> GENERATE FIXTURES & START
-            
-      
-            </button>
-
-<div class="mt-8 border-t border-ucl-highlight/20 pt-6">
-        <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-            <i class="ph-bold ph-megaphone text-2xl mr-2 text-ucl-highlight"></i> Post Tournament News
-        </h3>
-        <div class="space-y-3">
-            <textarea id="admin-news-input" placeholder="Type news here (e.g., 'Final match scheduled for 8 PM!')" 
-                class="block w-full rounded-md border-ucl-highlight/50 shadow-sm p-3 border bg-ucl-dark text-ucl-text h-24"></textarea>
-            <button id="publish-news-btn" class="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-150 flex items-center justify-center">
-                <i class="ph-bold ph-paper-plane-tilt text-xl mr-2"></i> PUBLISH NEWS
-            </button>
-            <button id="clear-news-btn" class="w-full px-4 py-2 bg-red-600/20 text-red-400 border border-red-600/50 font-semibold rounded-lg hover:bg-red-600 hover:text-white transition duration-150">
-                Clear News Strip
-            </button>
-        </div>
-    </div>
-
-
-<div class="mt-6 border-t border-ucl-highlight/20 pt-6">
-        <label class="block text-sm font-medium text-ucl-text mb-2">Update Tournament News</label>
-        <div class="flex gap-2">
-            <input type="text" id="admin-news-input" placeholder="Type tournament news here..." 
-                class="flex-1 rounded-md border-ucl-highlight/50 shadow-sm p-3 border bg-ucl-dark text-ucl-text">
-            <button id="save-news-btn" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition">
-                Post News
-            </button>
-        </div>
-        <p class="text-xs text-gray-400 mt-2">This will appear at the bottom of Fixtures, Points, and Stats tabs.</p>
-    </div>
-
-                            <div id="start-message" class="text-sm mt-2 text-center text-ucl-highlight"></div>
-                    
-     </form>
+                            <div id="start-message" class="text-sm text-center mt-2"></div>
+                        </form>
                     </div>
 
-     
-        
-         <div class="bg-ucl-card p-6 rounded-xl shadow-md">
-                        <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg mb-4">Upload Match Results</h3>
-                   
-         <div id="admin-results-content">
-                  
-           <div class="text-center py-6 
- text-ucl-text">
-                                Select an active tournament above to load results panel.
- </div>
+                    <!-- News Management -->
+                    <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-accent/20 p-3 rounded-lg mr-4">
+                                <i class="ph ph-megaphone text-2xl text-accent"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Tournament News</h3>
+                                <p class="text-gray-400">Post updates and announcements</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <textarea id="admin-news-input" placeholder="Type tournament news here (e.g., 'Final match scheduled for 8 PM!')"
+                                class="w-full px-4 py-3 rounded-lg bg-surface border border-gray-700 text-white focus:border-accent focus:ring-2 focus:ring-accent/30 transition-all duration-300 h-32 custom-scrollbar"></textarea>
+                            
+                            <div class="flex gap-3">
+                                <button id="publish-news-btn"
+                                    class="flex-1 gradient-bg text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-all duration-300 flex items-center justify-center">
+                                    <i class="ph ph-paper-plane-tilt mr-2"></i> PUBLISH NEWS
+                                </button>
+                                <button id="clear-news-btn"
+                                    class="px-6 bg-surface border border-danger/30 text-danger font-semibold py-3 rounded-lg hover:bg-danger/10 transition-all duration-300">
+                                    <i class="ph ph-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Match Results Upload -->
+                    <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-warning/20 p-3 rounded-lg mr-4">
+                                <i class="ph ph-upload-simple text-2xl text-warning"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Upload Match Results</h3>
+                                <p class="text-gray-400">Update scores and advanced statistics</p>
+                            </div>
+                        </div>
+                        
+                        <div id="admin-results-content">
+                            <div class="text-center py-8">
+                                <div class="loading-shimmer h-4 w-48 mx-auto mb-2 rounded"></div>
+                                <div class="loading-shimmer h-4 w-32 mx-auto rounded"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Fixtures Tab -->
             <div id="fixtures" class="tab-pane space-y-6">
-             
- 
-    <div class="bg-ucl-card p-6 rounded-xl shadow-md">
-                    <h2 id="fixtures-header" class="text-2xl font-semibold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-                        <i class="ph-bold ph-calendar-check text-2xl mr-2 text-ucl-highlight"></i> Ongoing Matchday Fixtures
-                    </h2>
-          
-                    <div id="group-tabs-container" class="mb-4 hidden bg-ucl-header-bar p-1 rounded-xl">
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg p-3 rounded-lg mr-4">
+                            <i class="ph ph-calendar-check text-2xl text-white"></i>
                         </div>
-
-                    <div id="fixtures-content">
-                        <div class="text-center py-6 text-ucl-text">
-                            Tournament fixtures will appear here once the schedule is generated.
- </div>
+                        <div>
+                            <h2 id="fixtures-header" class="text-2xl font-bold text-white">Tournament Fixtures</h2>
+                            <p class="text-gray-400">View all scheduled matches and results</p>
+                        </div>
+                    </div>
+                    
+                    <div id="group-tabs-container" class="mb-6 hidden">
+                        <!-- Group tabs will be dynamically inserted here -->
+                    </div>
+                    
+                    <div id="fixtures-content" class="custom-scrollbar">
+                        <div class="text-center py-12">
+                            <i class="ph ph-calendar-blank text-5xl text-gray-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-400 mb-2">No Fixtures Available</h3>
+                            <p class="text-gray-500">Tournament fixtures will appear here once generated by admin.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Points Table Tab -->
             <div id="points" class="tab-pane space-y-6 hidden">
-                <div class="bg-ucl-card p-6 rounded-xl shadow-md">
-                
- 
-     <h2 id="points-header" class="text-2xl font-semibold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-                        <i class="ph-bold ph-list-numbers text-2xl mr-2 text-ucl-highlight"></i> Official Points Table
-                    </h2>
-                    <div id="points-table-content" class="overflow-x-auto">
-           
-   
-           <div class="text-center py-6 text-ucl-text">
-                            Upload results in the Admin tab to populate the points table.
- </div>
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg p-3 rounded-lg mr-4">
+                            <i class="ph ph-trophy text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 id="points-header" class="text-2xl font-bold text-white">Tournament Standings</h2>
+                            <p class="text-gray-400">Current rankings and team statistics</p>
+                        </div>
+                    </div>
+                    
+                    <div id="points-table-content" class="overflow-x-auto custom-scrollbar">
+                        <div class="text-center py-12">
+                            <i class="ph ph-table text-5xl text-gray-600 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-400 mb-2">No Standings Available</h3>
+                            <p class="text-gray-500">Standings will appear here once matches are played.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Stats Tab -->
             <div id="stats" class="tab-pane space-y-6 hidden">
-                <div class="bg-ucl-card p-6 rounded-xl shadow-md">
-                
- 
-     <h2 class="text-2xl font-semibold text-white section-header-bg p-3 rounded-lg flex items-center mb-4">
-                        <i class="ph-bold ph-chart-line text-2xl mr-2 text-ucl-highlight"></i> League Statistics
-                    </h2>
-                    <div id="stats-content" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-  
-             <div id="top-scorers" class="bg-ucl-dark p-4 rounded-lg shadow-inner">
-                            <h4 class="font-bold text-white section-header-bg p-2 rounded-lg mb-3">GOLDEN BOOT🎖️</h4>
-                            <ul id="scorers-list" class="space-y-1 text-ucl-text"></ul>
-              
-  
-        </div>
-                        <div id="top-defense" class="bg-ucl-dark p-4 rounded-lg shadow-inner">
-                            <h4 class="font-bold text-white section-header-bg p-2 rounded-lg mb-3">Best Defense (GA)</h4>
-                          
- 
-   <ul 
- id="defense-list" class="space-y-1 text-ucl-text"></ul>
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg p-3 rounded-lg mr-4">
+                            <i class="ph ph-chart-line text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">Tournament Statistics</h2>
+                            <p class="text-gray-400">Advanced statistics and player performance</p>
                         </div>
                     </div>
-                    <div id="stats-misc" class="text-center pt-6 text-sm text-ucl-text/70"></div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Scoring Stats -->
+                        <div class="stat-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-success/20 p-2 rounded-lg mr-3">
+                                    <i class="ph ph-soccer-ball text-xl text-success"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">GOLDEN BOOT🎖️</h4>
+                            </div>
+                            <ul id="scorers-list" class="space-y-3">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                        </div>
+                        
+                        <!-- Defensive Stats -->
+                        <div class="stat-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-danger/20 p-2 rounded-lg mr-3">
+                                    <i class="ph ph-shield-check text-xl text-danger"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">Best Defense (GA)</h4>
+                            </div>
+                            <ul id="defense-list" class="space-y-3">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                        </div>
+                        
+                        <!-- Passing Stats -->
+                        <div class="stat-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-accent/20 p-2 rounded-lg mr-3">
+                                    <i class="ph ph-arrows-left-right text-xl text-accent"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">Most Passes</h4>
+                            </div>
+                            <ul id="passes-list" class="space-y-3">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                        </div>
+                        
+                        <!-- Tackling Stats -->
+                        <div class="stat-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-warning/20 p-2 rounded-lg mr-3">
+                                    <i class="ph ph-sword text-xl text-warning"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">Most Tackles</h4>
+                            </div>
+                            <ul id="tackles-list" class="space-y-3">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Goalkeeping Stats -->
+                    <div class="mt-6">
+                        <div class="stat-card">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-500/20 p-2 rounded-lg mr-3">
+                                    <i class="ph ph-hand-grabbing text-xl text-purple-400"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">Most Saves</h4>
+                            </div>
+                            <ul id="saves-list" class="space-y-3">
+                                <!-- Will be populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="stats-misc" class="text-center pt-6 text-sm text-gray-500"></div>
                 </div>
-        
-  
-    </div>
- 
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 py-6 text-center text-gray-500 text-sm">
+            <p>EFOOTBALL CHAMPIONSHIP © 2025 • Organized by Salman Syed</p>
+            <p class="mt-1">All statistics are updated in real-time</p>
+        </footer>
     </div>
 
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     
     <script>
-        // --- CONSTANTS & FIREBASE SETUP ---
+        // ==================== CONSTANTS & CONFIGURATION ====================
         const ADMIN_PASSWORD = "EFOOTBALL2026";
- // YOUR EMBEDDED FIREBASE CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyAKXE_sklR_wpRYUaV-l7jZFHbEOhN0GZU",
             authDomain: "efootball-2026.firebaseapp.com",
@@ -485,64 +720,43 @@ Brentford : @asim
             projectId: "efootball-2026",
             storageBucket: "efootball-2026.firebasestorage.app",
             messagingSenderId: "189433778137",
-       
- 
-      appId: "1:189433778137:web:10517370da0990108d93c8",
+            appId: "1:189433778137:web:10517370da0990108d93c8",
             measurementId: "G-3ZQ3KGXPFG"
         };
- const app = firebase.initializeApp(firebaseConfig);
+        
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
         const database = app.database();
         const tournamentRef = database.ref('tournament/settings');
+        const newsRef = database.ref('tournament/news');
+        const statsRef = database.ref('tournament/stats');
 
-        let isAdmin = false; 
+        // Application State
+        let isAdmin = false;
         let currentTab = 'fixtures';
-        let tournamentData = null; // Stores latest tournament data
-        let activeGroup = null; // NEW: Global variable to track active group tab for fixtures
+        let tournamentData = null;
+        let activeGroup = null;
+        let advancedStats = {};
 
-// News logic
-        const saveNewsToDatabase = () => {
-            const newsContent = document.getElementById('admin-news-input').value;
-            database.ref('tournament/news').set(newsContent);
-            showMessage('start-message', 'News updated successfully!', false);
-        };
-
-// Location: Replace the function at line 316
-const renderNewsStrip = (news) => {
-    const container = document.getElementById('news-strip-container');
-    const newsText = document.getElementById('news-text');
-    
-    const visibleTabs = ['fixtures', 'points', 'stats'];
-    
-    if (news && news.trim() !== "" && visibleTabs.includes(currentTab)) {
-        // We use innerHTML to ensure the animation resets when news changes
-        newsText.innerHTML = news; 
-        container.classList.remove('hidden');
-    } else {
-        container.classList.add('hidden');
-    }
-};
-
-        // --- TEAM LOGO MAPPING ---
+        // ==================== YOUR ORIGINAL LOGO FETCHING LOGIC ====================
         const TEAM_LOGOS = {
             'Manchester United': 'https://crests.football-data.org/66.png',
             'Manchester City': 'https://crests.football-data.org/65.png',
-            'Liverpool': 'https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg', // UPDATED LIVERPOOL LOGO
+            'Liverpool': 'https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg',
             'Chelsea': 'https://crests.football-data.org/61.png',
-      
-       'Tottenham Hotspur': 'https://crests.football-data.org/73.png',
+            'Tottenham Hotspur': 'https://crests.football-data.org/73.png',
             'Arsenal': 'https://crests.football-data.org/57.png',
             'Fulham': 'https://crests.football-data.org/63.png',
             'Nottingham Forest': 'https://crests.football-data.org/351.png',
             'AFC Bournemouth': 'https://crests.football-data.org/1044.png',
             'Crystal Palace': 'https://crests.football-data.org/341.png',
             'Wolverhampton Wanderers': 'https://crests.football-data.org/76.png',
-          
-   'Sunderland': 'https://crests.football-data.org/394.png', // New Team Crest
+            'Sunderland': 'https://crests.football-data.org/394.png',
             'Newcastle United': 'https://crests.football-data.org/62.png',
             'Brighton & Hove Albion': 'https://crests.football-data.org/397.png',
             'Aston Villa': 'https://crests.football-data.org/58.png',
             'Brentford': 'https://crests.football-data.org/404.png',
-        'Real Madrid': 'https://crests.football-data.org/86.png',
+            'Real Madrid': 'https://crests.football-data.org/86.png',
             'Barcelona': 'https://crests.football-data.org/81.png',
             'PSG': 'https://crests.football-data.org/524.png',
             'Paris Saint-Germain': 'https://crests.football-data.org/524.png',
@@ -556,66 +770,60 @@ const renderNewsStrip = (news) => {
             'Dortmund': 'https://crests.football-data.org/4.png'
         };
 
-        // --- UPDATED SMART LOGO LOGIC ---
-const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
-    // 1. Check your manual list first (for the 16 PL teams)
-    let logoUrl = TEAM_LOGOS[teamName];
+        const getTeamLogoHtml = (teamName, sizeClass = 'w-6 h-6') => {
+            // 1. Check your manual list first
+            let logoUrl = TEAM_LOGOS[teamName];
 
-    // 2. If not in the list, try to guess if it's a National Team (Flag API)
-    if (!logoUrl) {
-        // Map common country names to codes for the Flag API
-        const countryCodes = {
-            'Brazil': 'BR', 'Argentina': 'AR', 'France': 'FR', 'Germany': 'DE', 
-            'Portugal': 'PT', 'Spain': 'ES', 'Italy': 'IT', 'England': 'GB',
-            'Morocco': 'MA', 'Japan': 'JP', 'Nigeria': 'NG', 'Pakistan': 'PK'
+            // 2. If not in the list, try to guess if it's a National Team (Flag API)
+            if (!logoUrl) {
+                const countryCodes = {
+                    'Brazil': 'BR', 'Argentina': 'AR', 'France': 'FR', 'Germany': 'DE', 
+                    'Portugal': 'PT', 'Spain': 'ES', 'Italy': 'IT', 'England': 'GB',
+                    'Morocco': 'MA', 'Japan': 'JP', 'Nigeria': 'NG', 'Pakistan': 'PK'
+                };
+                
+                const code = countryCodes[teamName];
+                if (code) {
+                    logoUrl = `https://flagsapi.com/${code}/flat/64.png`;
+                }
+            }
+
+            // 3. If still not found, search the Football Database
+            if (!logoUrl) {
+                const formattedName = teamName.replace(/\s+/g, '_');
+                logoUrl = `https://www.thesportsdb.com/images/media/team/badge/small/${formattedName}.png`;
+            }
+
+            // Return the image with a fallback
+            return `
+                <img src="${logoUrl}" 
+                     alt="${teamName}" 
+                     class="${sizeClass} object-contain mr-2 rounded-lg" 
+                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/53/53254.png'; this.onerror=null;">
+            `;
         };
-        
-        const code = countryCodes[teamName];
-        if (code) {
-            logoUrl = `https://flagsapi.com/${code}/flat/64.png`;
-        }
-    }
 
-    // 3. If still not found, search the Football Database (TheSportsDB)
-    // Most professional clubs can be found by their name in this URL format
-    if (!logoUrl) {
-        const formattedName = teamName.replace(/\s+/g, '_'); // Replace spaces with underscores
-        logoUrl = `https://www.thesportsdb.com/images/media/team/badge/small/${formattedName}.png`;
-    }
+        // ==================== YOUR ORIGINAL UTILITY FUNCTIONS ====================
+        const showMessage = (elementId, message, isError = false) => {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.textContent = message;
+            el.className = `text-sm text-center ${isError ? 'text-danger' : 'text-success'}`;
+            setTimeout(() => el.textContent = '', 5000);
+        };
 
-    // Return the image with a fallback "Placeholder" if the link fails
-    return `
-        <img src="${logoUrl}" 
-             alt="${teamName}" 
-             class="${sizeClass} object-contain mr-2" 
-             onerror="this.src='https://cdn-icons-png.flaticon.com/512/53/53254.png'; this.onerror=null;">
-    `;
-};
-        
-        // --- UTILITY FUNCTIONS ---
-        
-        // Simple shuffle function
         const shuffleArray = (array) => {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
-        }
-
-        const showMessage = (elementId, message, isError = true) => {
-            const el = document.getElementById(elementId);
-            if (!el) return;
-            el.textContent = message;
-            el.className = `text-sm mt-2 text-center ${isError ? 'text-ucl-highlight' : 'text-green-500'}`;
-            setTimeout(() => el.textContent = '', 5000);
         };
-        
+
         const getDatesBetween = (start, end) => {
             const dates = [];
             let currentDate = new Date(start);
             const endDate = new Date(end);
-            // Ensure start date is valid
             if (isNaN(currentDate.getTime()) || isNaN(endDate.getTime())) return dates;
             while (currentDate <= endDate) {
                 dates.push(currentDate.toISOString().split('T')[0]);
@@ -623,132 +831,114 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
             }
             return dates;
         };
-        const updateFormVisibility = () => {
-            const type = document.getElementById('tournament-type').value;
-            document.getElementById('league-rounds-container').classList.toggle('hidden', type !== 'league');
-            document.getElementById('groups-count').closest('div').classList.toggle('hidden', type !== 'group_knockout');
-            document.getElementById('matches-per-day-container').classList.toggle('hidden', type === 'group_knockout');
-            // Set default groups count based on teams count (if 16, default to 4)
-            const teamsCount = parseInt(document.getElementById('teams-count').value);
-            const groupsCountEl = document.getElementById('groups-count');
-            if (type === 'group_knockout') {
-                if (teamsCount >= 16) {
-                    groupsCountEl.value = 4;
-                } else if (teamsCount >= 4) {
-                    groupsCountEl.value = 2;
-                } else {
-                    groupsCountEl.value = 2;
-                }
-            }
-        };
-        // --- APP INITIALIZATION ---
 
+        // ==================== YOUR ORIGINAL HELPER FUNCTIONS ====================
+        const getPlayerName = (teamName, players) => {
+            const playerName = players[teamName];
+            if (playerName && !teamName.startsWith('Winner of') && !teamName.startsWith('TBD Rank')) {
+                return `<span class="text-white text-xs opacity-80 ml-2">(${playerName})</span>`;
+            }
+            return '';
+        };
+
+        // ==================== INITIALIZATION ====================
         const initializeApp = () => {
             // Set default dates
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('start-date').value = today;
             
-            // Set default teams count and matches per day
-            document.getElementById('teams-count').value = 16;
-            document.getElementById('matches-per-day').value = 1;
-            document.getElementById('groups-count').value = 4;
-
-            // Setup Event Listeners
+            // Setup event listeners
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
             });
+            
             document.getElementById('admin-auth-form').addEventListener('submit', handleAdminAuth);
             document.getElementById('start-tournament-form').addEventListener('submit', handleStartTournament);
             document.getElementById('tournament-type').addEventListener('change', updateFormVisibility);
             document.getElementById('teams-count').addEventListener('change', updateFormVisibility);
-
-            // Set initial form visibility (Group Stage options hidden by default)
+            document.getElementById('publish-news-btn').addEventListener('click', handlePublishNews);
+            document.getElementById('clear-news-btn').addEventListener('click', handleClearNews);
+            
+            // Set initial form visibility
             updateFormVisibility();
-            // Hide splash screen and show main app after a delay (6000ms = 6 seconds)
+            
+            // Hide splash screen after delay
             setTimeout(() => {
                 document.getElementById('splash-screen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('splash-screen').classList.add('hidden');
-            
-    
-      document.getElementById('main-app').classList.remove('hidden');
+                    document.getElementById('main-app').classList.remove('hidden');
                 }, 1000);
-            }, 6000);
-            // 6 seconds delay
+            }, 3000);
             
-            // Ensure the initial tab (fixtures) is correctly activated on load
+            // Set initial tab
             switchTab(currentTab);
         };
-        // --- TAB NAVIGATION ---
 
+        // ==================== TAB NAVIGATION ====================
         const switchTab = (tabName) => {
             currentTab = tabName;
-            // Update buttons
+            
+            // Update tab buttons
             document.querySelectorAll('.tab-button').forEach(btn => {
                 const isSelected = btn.getAttribute('data-tab') === tabName;
-                
-                // Reset classes
-        
-         btn.classList.remove('bg-ucl-accent', 'border-pl-highlight', 'text-pl-highlight', 'text-white', 'border-transparent');
-        
-         btn.classList.add('border-2');
-
-                if (isSelected) {
-                    // Active tab: Set accent background, highlight border, and white text
-                    btn.classList.add('bg-pl-accent', 'text-white', 'border-pl-highlight');
-                } else {
-    
-              
-                  // Inactive tab: Set transparent border and **PERMANENTLY WHITE TEXT**
-                  btn.classList.add('border-transparent', 'text-white'); 
-                }
+                btn.classList.toggle('tab-active', isSelected);
+                btn.classList.toggle('bg-surface', !isSelected);
+                btn.classList.toggle('text-gray-400', !isSelected);
             });
-            // Update content panes
+            
+            // Show selected tab content
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.toggle('hidden', pane.id !== tabName);
             });
-            // Re-render admin results and management if switching to admin
-            if (tabName === 'admin' && isAdmin) {
-                renderAdminManagementPanel(tournamentData);
- // Rerender management panel
-                renderAdminResultsContent(tournamentData);
- // Rerender results panel
-            }
             
-            // Re-render stats if switching to stats
-            if (tabName === 'stats' && tournamentData) {
-                const standings = calculateStandings(tournamentData.teams, tournamentData.schedule);
-                renderStats(standings, tournamentData.players);
+            // Refresh data for current tab
+            if (tournamentData) {
+                if (tabName === 'fixtures') renderFixtures(tournamentData);
+                if (tabName === 'points') renderPointsTable(tournamentData);
+                if (tabName === 'stats') renderStats(tournamentData);
+                if (tabName === 'admin' && isAdmin) {
+                    renderAdminManagementPanel(tournamentData);
+                    renderAdminResultsContent(tournamentData);
+                }
             }
         };
-        // --- ADMIN AUTHENTICATION ---
 
+        // ==================== ADMIN FUNCTIONS ====================
         const handleAdminAuth = (e) => {
             e.preventDefault();
             const password = document.getElementById('admin-password').value;
+            
             if (password === ADMIN_PASSWORD) {
                 isAdmin = true;
                 document.getElementById('admin-auth-panel').classList.add('hidden');
                 document.getElementById('admin-panel').classList.remove('hidden');
-                document.getElementById('user-icon').classList.replace('text-ucl-text', 'text-ucl-highlight');
-                document.getElementById('user-display').textContent = `Admin User`;
+                document.getElementById('user-icon').classList.replace('text-accent', 'text-warning');
+                document.getElementById('user-display').textContent = 'Admin';
                 showMessage('admin-auth-message', 'Admin access granted!', false);
-                // Call render functions immediately after login
-                renderAdminManagementPanel(tournamentData);
-                renderAdminResultsContent(tournamentData);
+                
+                if (tournamentData) {
+                    renderAdminManagementPanel(tournamentData);
+                    renderAdminResultsContent(tournamentData);
+                }
             } else {
-                isAdmin = false;
                 showMessage('admin-auth-message', 'Incorrect password. Access denied.', true);
             }
         };
-        // --- SCHEDULING LOGIC ---
 
+        const updateFormVisibility = () => {
+            const type = document.getElementById('tournament-type').value;
+            document.getElementById('league-rounds-container').classList.toggle('hidden', type !== 'league');
+            document.getElementById('group-stage-options').classList.toggle('hidden', type !== 'group_knockout');
+            document.getElementById('matches-per-day-container').classList.toggle('hidden', type === 'group_knockout');
+        };
+
+        // ==================== YOUR ORIGINAL FIXTURE GENERATION FUNCTIONS ====================
         const generateRoundRobinMatches = (teams, roundOffset, leagueRoundStart) => {
             let n = teams.length;
             if (n % 2 !== 0) n++;
             let currentTeams = [...teams];
-            while (currentTeams.length < n) { currentTeams.push('BYE');
- } // Pad with BYE if odd
+            while (currentTeams.length < n) { currentTeams.push('BYE'); }
 
             const roundMatches = [];
             const totalRoundRobinRounds = n - 1;
@@ -759,34 +949,35 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
                 
                 for (let i = 0; i < half; i++) {
                     const home = currentTeams[i];
-                    const away = currentTeams[n - 1 - i]; // Pair first half with reversed second half
+                    const away = currentTeams[n - 1 - i];
 
                     if (home !== 'BYE' && away !== 'BYE') {
                         matchesInRound.push({
                             id: `${leagueRoundStart + roundOffset + round}-${matchesInRound.length}`,
-                            home: 
- home,
+                            home: home,
                             away: away,
                             homeScore: null,
                             awayScore: null,
-             
-             });
- }
+                            homePasses: null,
+                            awayPasses: null,
+                            homeTackles: null,
+                            awayTackles: null,
+                            homeSaves: null,
+                            awaySaves: null
+                        });
+                    }
                 }
                 
                 if (matchesInRound.length > 0) {
-                     roundMatches.push({ round: leagueRoundStart + roundOffset + round, matches: matchesInRound });
- }
+                    roundMatches.push({ round: leagueRoundStart + roundOffset + round, matches: matchesInRound });
+                }
 
-                // --- ROBUST TEAM ROTATION (Circle Method) ---
+                // Team rotation
                 if (currentTeams.length > 2) {
-                    const firstTeam = currentTeams[0]; // Fixed pivot
+                    const firstTeam = currentTeams[0];
                     const rotatingPart = currentTeams.slice(1);
-                    
-                    // Perform one rotation (Last element moves to the second position)
                     const lastElement = rotatingPart.pop();
                     const rotatedPart = [lastElement, ...rotatingPart];
-                    
                     currentTeams = [firstTeam, ...rotatedPart];
                 }
             }
@@ -797,34 +988,24 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
             if (!schedule || schedule.length === 0) return [];
             let currentMatchDay = new Date(startDateStr);
             let matchesOnCurrentDay = 0;
-            // Calculate total matches played by one team on one matchday
             const matchesPerRoundDay = (schedule.length > 0 && schedule[0].matches.length > 0) ? 
                                        schedule[0].matches.length * 2 * matchesPerTeamPerDay : 
-                                       Infinity; 
- // If no matches, use Infinity to prevent date skipping
+                                       Infinity;
 
             const datedSchedule = [];
             schedule.forEach(round => {
                 const numMatches = round.matches.length;
                 let dateToAssign = currentMatchDay.toISOString().split('T')[0];
                 
-                // Group Stage logic for date assignment: assign one round per day for simplicity
-               
                 if (matchesPerTeamPerDay > 0) {
                     matchesOnCurrentDay += numMatches;
-                
-                    // If adding these matches exceeds the limit, move to the next day
-                    if (matchesOnCurrentDay > matchesPerRoundDay) 
-                    {
+                    if (matchesOnCurrentDay > matchesPerRoundDay) {
                         currentMatchDay.setDate(currentMatchDay.getDate() + 1);
                         dateToAssign = currentMatchDay.toISOString().split('T')[0];
-                        matchesOnCurrentDay = numMatches; // Start count for the new day
-               
+                        matchesOnCurrentDay = numMatches;
                     }
                 } else {
-                    // For Knockout/Simple assignment: one round per day
-                    currentMatchDay.setDate(currentMatchDay.getDate() + (datedSchedule.length > 0 ?
-                        1 : 0));
+                    currentMatchDay.setDate(currentMatchDay.getDate() + (datedSchedule.length > 0 ? 1 : 0));
                     dateToAssign = currentMatchDay.toISOString().split('T')[0];
                 }
 
@@ -834,27 +1015,21 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
                 });
             });
             return datedSchedule;
-        }
+        };
 
-        // --- League Tournament Logic ---
         const generateLeagueSchedule = (teams, numRounds, startDateStr, matchesPerTeamPerDay) => {
             let fullSchedule = [];
             const roundsPerBlock = teams.length - (teams.length % 2 === 0 ? 1 : 0);
             
             for (let r = 0; r < numRounds; r++) { 
                 const isFlippedRoundBlock = r % 2 !== 0;
-                // Calculate the starting round number for this block (e.g., 1, then 4, then 7)
-                const roundOffset = r * roundsPerBlock; 
-                
-                // Generate a fresh N-1 set of fixtures (Round Robin block)
+                const roundOffset = r * roundsPerBlock;
                 const oneBlockSchedule = generateRoundRobinMatches(teams, roundOffset, 1);
                 
                 oneBlockSchedule.forEach(round => {
                     const matches = round.matches.map(match => {
-                        // Flip home/away for every second block to ensure double round robin
                         const [team1, team2] = isFlippedRoundBlock ? [match.away, match.home] : [match.home, match.away];
                         return { ...match, home: team1, away: team2 };
-        
                     });
                     
                     fullSchedule.push({ 
@@ -865,12 +1040,11 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
             }
             return assignDates(fullSchedule, startDateStr, matchesPerTeamPerDay);
         };
-        // --- Group Stage & Knockout Logic ---
 
         const generateGroupKnockoutSchedule = (teams, groupsCount, startDateStr) => {
             // 1. Assign Teams to Groups
             const groupSize = teams.length / groupsCount;
-            if (groupSize % 1 !== 0) return { schedule: [], groups: {} }; // Should be caught by validation
+            if (groupSize % 1 !== 0) return { schedule: [], groups: {} };
             
             const shuffledTeams = shuffleArray([...teams]);
             const groups = {};
@@ -879,66 +1053,51 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
                 groups[groupName] = shuffledTeams.slice(i * groupSize, (i + 1) * groupSize);
             }
             
-            // 2. Generate Group Stage Matches (Round Robin in each group)
-            // Removed currentLeagueRound = 0;
+            // 2. Generate Group Stage Matches
             let groupStageSchedule = [];
             
             for (const groupName in groups) {
                 const groupTeams = groups[groupName];
-                // Generate a round-robin block for this group, starting its rounds at 1
                 const matches = generateRoundRobinMatches(groupTeams, 0, 1);
                 
                 matches.forEach(round => {
-                    // FIX: Make match ID unique by incorporating the group name
                     round.matches.forEach(match => {
                         match.group = groupName;
-                        // Prefix the match ID with the group name (e.g., "Group_A_1-0")
                         match.id = `${groupName.replace(/\s/g, '_')}_${match.id}`;
                     });
                     
-                    // The round number for merging is just the round-robin round number (1, 2, 3...)
                     const roundNumber = round.round;
-                    // Check if a round for this number already exists (to merge matches from different groups)
                     const existingRound = groupStageSchedule.find(r => r.round === roundNumber);
                     
                     const matchesToUse = round.matches.filter(m => m.home && m.away);
 
                     if (existingRound) {
-                        // MERGE: Append matches to the existing round
                         existingRound.matches.push(...matchesToUse);
                     } else {
-                        // NEW ROUND: Create a new round object
                         groupStageSchedule.push({ 
                             round: roundNumber, 
                             matches: matchesToUse
                         });
                     }
                 });
-                // NOTE: The incorrect currentLeagueRound update was removed from here.
             }
             
-            // Sort group stage schedule by round number
             groupStageSchedule.sort((a, b) => a.round - b.round);
-            
-            const groupStageDated = assignDates(groupStageSchedule, startDateStr, 0); // matchesPerTeamPerDay=0 for simple 1 round/day dating
+            const groupStageDated = assignDates(groupStageSchedule, startDateStr, 0);
             
             // 3. Prepare Knockout Template
             let knockoutScheduleTemplate = [];
             let qualifyingTeamsCount;
-            // Determine the max round number from the group stage for the KO round starting point
             let koRoundCounter = groupStageDated.length > 0 ? groupStageDated[groupStageDated.length - 1].round : 0;
 
             if (teams.length >= 16) {
-                // Top 8 qualify for Quarter-Finals (4 matches, then 2, then 1)
                 qualifyingTeamsCount = 8;
                 knockoutScheduleTemplate = [
                     { round: ++koRoundCounter, name: 'Quarter-Finals', matches: 4 },
                     { round: ++koRoundCounter, name: 'Semi-Finals', matches: 2 },
                     { round: ++koRoundCounter, name: 'Final', matches: 1 }
-        
-          ];
+                ];
             } else {
-                // Top 4 qualify for Semi-Finals (2 matches, then 1)
                 qualifyingTeamsCount = 4;
                 knockoutScheduleTemplate = [
                     { round: ++koRoundCounter, name: 'Semi-Finals', matches: 2 },
@@ -952,33 +1111,35 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
                 const stageName = roundTemplate.name;
                 for (let i = 0; i < roundTemplate.matches; i++) {
                     const matchName = roundTemplate.matches > 1 ? `${stageName} Match ${i + 1}` : 'Final';
-  
-                   matches.push({
+                    matches.push({
                         id: `KNOCKOUT-${roundTemplate.round}-${matchIdCounter++}`,
-                        home: `Winner of ${matchName} Home Team`, // Placeholder name to be updated post group stage
-                   
-             away: `Winner of ${matchName} Away Team`, // Placeholder...
+                        home: `Winner of ${matchName} Home Team`,
+                        away: `Winner of ${matchName} Away Team`,
                         homeScore: null,
                         awayScore: null,
+                        homePasses: null,
+                        awayPasses: null,
+                        homeTackles: null,
+                        awayTackles: null,
+                        homeSaves: null,
+                        awaySaves: null,
                         group: stageName,
                         knockout: true
                     });
                 }
                 groupStageDated.push({
                     round: roundTemplate.round,
-                    date: '', // Will be assigned later
+                    date: '',
                     matches: matches
                 });
             });
 
-            // Assign dates to knockout rounds (one round per day, starting the day after group stage)
-            // Determine the date of the last group stage match
+            // Assign dates to knockout rounds
             const lastGroupMatchDate = groupStageDated.filter(r => !r.matches.some(m => m.knockout)).map(r => r.date).sort().pop();
             
             let currentKnockoutDay = lastGroupMatchDate ? new Date(lastGroupMatchDate) : new Date(startDateStr);
-            currentKnockoutDay.setDate(currentKnockoutDay.getDate() + 1); // Start Knockout day after last group match
+            currentKnockoutDay.setDate(currentKnockoutDay.getDate() + 1);
             
-            // Assign dates to knockout rounds
             for(let i = groupStageDated.findIndex(r => r.matches.some(m => m.knockout)); i < groupStageDated.length; i++) {
                 const round = groupStageDated[i];
                 if (round.matches.some(m => m.knockout)) {
@@ -987,11 +1148,10 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
                 }
             }
 
-
             return { schedule: groupStageDated, groups: groups, qualifiers: qualifyingTeamsCount };
         };
 
-        // --- TOURNAMENT CREATION HANDLER ---
+        // ==================== TOURNAMENT CREATION ====================
         const handleStartTournament = async (e) => {
             e.preventDefault();
             
@@ -1007,15 +1167,13 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
 
             const teamLines = teamsAndPlayersRaw.split('\n').filter(line => line.trim() !== '');
             const teams = [];
-            const players = {}; // Player object: { 'Team Name': 'Player Name' }
+            const players = {};
 
             teamLines.forEach(line => {
                 const parts = line.split(':').map(p => p.trim());
                 if (parts.length === 2) {
-                    const teamName = parts[0];
-                    const playerName = parts[1];
-                    teams.push(teamName);
-                    players[teamName] = playerName;
+                    teams.push(parts[0]);
+                    players[parts[0]] = parts[1];
                 }
             });
 
@@ -1037,24 +1195,22 @@ const getTeamLogoHtml = (teamName, sizeClass = 'w-5 h-5') => {
             if (type === 'league') {
                 numRounds = parseInt(document.getElementById('num-rounds').value);
                 if (numRounds < 1) {
-                     showMessage('start-message', 'Matches Per Team (League Rounds) must be 1 or greater.', true);
-                     return;
+                    showMessage('start-message', 'Matches Per Team must be 1 or greater.', true);
+                    return;
                 }
-                matchesPerTeamPerDay = parseInt(document.getElementById('matches-per-day').value); // Pass new parameter
+                matchesPerTeamPerDay = parseInt(document.getElementById('matches-per-day').value);
                 scheduleData = generateLeagueSchedule(teams, numRounds, startDateStr, matchesPerTeamPerDay);
             } else if (type === 'group_knockout') {
                 const groupsCount = parseInt(document.getElementById('groups-count').value);
-        // Original: if (teamsCount % groupsCount !== 0 || groupsCount < 2 || groupsCount % 2 !== 0) {
-// The Fix:
-if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)) {
-    showMessage('start-message', 'Teams must be evenly divisible by the number of groups. Group count must be 1, or an even number (2 or more).', true);
-    return;
-}
+                if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)) {
+                    showMessage('start-message', 'Teams must be evenly divisible by the number of groups. Group count must be 1, or an even number (2 or more).', true);
+                    return;
+                }
                 const knockoutResult = generateGroupKnockoutSchedule(teams, groupsCount, startDateStr);
                 scheduleData = knockoutResult.schedule;
                 groupsData = knockoutResult.groups;
                 knockoutQualifiers = knockoutResult.qualifiers;
-                activeGroup = Object.keys(groupsData).sort()[0] || null; // Set initial active group on creation
+                activeGroup = Object.keys(groupsData).sort()[0] || null;
             }
 
             if (!scheduleData || scheduleData.length === 0) {
@@ -1062,108 +1218,43 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 return;
             }
 
+            // Initialize advanced stats
+            const initialStats = {};
+            teams.forEach(team => {
+                initialStats[team] = {
+                    passes: 0,
+                    tackles: 0,
+                    saves: 0
+                };
+            });
+
             const tournamentDataToSave = {
                 type: type,
                 teams: teams,
                 players: players,
-                groups: groupsData, // Save group data
+                groups: groupsData,
                 numRoundsPerTeam: numRounds,
                 matchesPerTeamPerDay: matchesPerTeamPerDay,
                 knockoutQualifiers: knockoutQualifiers,
                 startDate: startDateStr,
                 schedule: scheduleData,
+                advancedStats: initialStats,
                 organizerId: "ADMIN_USER",
                 lastUpdated: new Date().toISOString()
             };
 
             try {
-                // Realtime Database 'set' function
                 await tournamentRef.set(tournamentDataToSave);
+                await statsRef.set(initialStats);
                 showMessage('start-message', `Tournament started with ${scheduleData.length} matchdays!`, false);
                 switchTab('fixtures');
-                // Move to fixtures tab after creation
             } catch (error) {
                 console.error("Error saving tournament data:", error);
                 showMessage('start-message', 'Failed to save tournament data. Check console.', true);
             }
-
-// Trigger news visibility check on tab switch
-            database.ref('tournament/news').once('value', snapshot => renderNewsStrip(snapshot.val()));
         };
 
-        // --- TOURNAMENT MANAGEMENT & RESULT UPDATING ---
-
-        const handleDeleteTournament = async () => {
-            if (confirm("Are you sure you want to permanently delete the current tournament and all results?")) {
-                try {
-                    await tournamentRef.set(null); // Delete the entire tournament node
-                    showMessage('admin-auth-message', 'Tournament successfully deleted.', false);
-                } catch (error) {
-                    console.error("Error deleting tournament:", error);
-                    alert('Failed to delete tournament. Check console.');
-                }
-            }
-        };
-
-        const handleUpdateResult = async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const matchId = form.getAttribute('data-match-id');
-            const homeScore = parseInt(form.querySelector('.score-input-home').value);
-            const awayScore = parseInt(form.querySelector('.score-input-away').value);
-
-            if (isNaN(homeScore) || isNaN(awayScore) || homeScore < 0 || awayScore < 0) {
-                alert('Please enter valid, non-negative scores.');
-                return;
-            }
-
-            if (!tournamentData) {
-                alert('No active tournament data found.');
-                return;
-            }
-            
-            // Deep copy and update the schedule
-            let newSchedule = JSON.parse(JSON.stringify(tournamentData.schedule));
-            let found = false;
-            
-            try {
-                newSchedule = newSchedule.map(round => ({
-                    ...round,
-                    matches: round.matches.map(match => {
-                        if (match.id === matchId) {
-                            match.homeScore = homeScore;
-                            match.awayScore = awayScore;
-                            found = true;
-                        }
-                        return match;
-                    })
-                }));
-
-                if (found) {
-                    // Update the entire 'schedule' node in the database
-                    await tournamentRef.update({ 
-                        schedule: newSchedule,
-                        lastUpdated: new Date().toISOString()
-                    });
-
-                    // Small visual feedback on the button
-                    const btn = form.querySelector('button[type="submit"]');
-                    btn.innerHTML = `<i class="ph-bold ph-check text-lg"></i>`;
-                    btn.classList.replace('bg-ucl-highlight', 'bg-green-600');
-                    setTimeout(() => {
-                        btn.innerHTML = `<i class="ph-bold ph-floppy-disk text-lg"></i>`;
-                        btn.classList.replace('bg-green-600', 'bg-ucl-highlight');
-                    }, 1000);
-                } else {
-                    throw "Match ID not found in schedule.";
-                }
-            } catch (error) {
-                console.error("Failed to update match result:", error);
-                alert('Failed to save result. Check console.');
-            }
-        };
-
-        // --- STANDINGS & STATS CALCULATIONS ---
+        // ==================== YOUR ORIGINAL STANDINGS CALCULATION ====================
         const calculateStandings = (teams, scheduleData) => {
             const standings = {};
             teams.forEach(team => {
@@ -1177,9 +1268,9 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
 
             if (!scheduleData) return { overall: [], byGroup: {} };
 
-            // 1. Process Group Stage Matches
+            // Process all matches
             scheduleData.forEach(round => {
-                round.matches.filter(m => !m.knockout).forEach(match => {
+                round.matches.forEach(match => {
                     const homeTeam = match.home;
                     const awayTeam = match.away;
                     const homeScore = parseInt(match.homeScore);
@@ -1191,7 +1282,7 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                     const away = standings[awayTeam];
 
                     // Set group if applicable
-                    if (match.group) {
+                    if (match.group && !match.knockout) {
                         home.group = match.group;
                         away.group = match.group;
                     }
@@ -1206,7 +1297,7 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                     away.GF += awayScore;
                     away.GA += homeScore;
 
-                    // Update results and points
+                    // Update results and points (3 points for win, 1 for draw, 0 for loss)
                     if (homeScore > awayScore) {
                         home.W++; home.Pts += 3;
                         away.L++;
@@ -1220,20 +1311,20 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 });
             });
 
-            // 2. Calculate GD
+            // Calculate GD
             Object.values(standings).forEach(team => {
                 team.GD = team.GF - team.GA;
             });
 
-            // 3. Sort Standings (Overall)
+            // Sort Standings (Overall)
             const overallStandings = Object.values(standings).sort((a, b) => {
                 if (b.Pts !== a.Pts) return b.Pts - a.Pts;
                 if (b.GD !== a.GD) return b.GD - a.GD;
                 if (b.GF !== a.GF) return b.GF - a.GF;
-                return a.team.localeCompare(b.team); // Alphabetical tie-breaker
+                return a.team.localeCompare(b.team);
             });
 
-            // 4. Sort Standings (By Group)
+            // Sort Standings (By Group)
             const standingsByGroup = {};
             overallStandings.filter(t => t.group).forEach(team => {
                 if (!standingsByGroup[team.group]) {
@@ -1242,372 +1333,117 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 standingsByGroup[team.group].push(team);
             });
             
-            // Groups are already sorted because overall standings are sorted first
-
             return { overall: overallStandings, byGroup: standingsByGroup };
         };
 
-        // --- KNOCKOUT BRACKET LOGIC & UPDATING ---
-        const updateKnockoutBracket = async (tournament, standings) => {
-            if (tournament.type !== 'group_knockout' || !standings.overall || standings.overall.length === 0) return;
-
-            const qualifyingTeams = standings.overall
-                .filter(t => t.P > 0) // Only teams that played
-                .slice(0, tournament.knockoutQualifiers)
-                .map(t => t.team);
-
-            // Check if group stage is complete (all teams played all group matches)
-            const teamsInGroupStage = tournament.teams.length;
-            const totalGroupStageRounds = tournament.groups ? 
-                                          (teamsInGroupStage / Object.keys(tournament.groups).length) - 1 : 
-                                          0;
-
-            const groupStageMatchesPlayed = standings.overall.reduce((sum, t) => sum + t.P, 0) / 2;
-            const totalGroupStageMatches = tournament.schedule.filter(r => !r.matches.some(m => m.knockout)).reduce((sum, r) => sum + r.matches.length, 0);
-            
-            if (groupStageMatchesPlayed < totalGroupStageMatches) { 
-                // Group stage is not complete, do not update knockout slots yet.
-                return;
-            }
-
-            let newSchedule = JSON.parse(JSON.stringify(tournament.schedule));
-            let knockoutRounds = newSchedule.filter(r => r.matches.some(m => m.knockout));
-            if (knockoutRounds.length === 0) return;
-
-            // Simple Bracket Pairing based on overall rank for initial round
-            const getTeamForSlot = (rank) => qualifyingTeams[rank - 1] ||
-                `TBD Rank ${rank}`;
-
-            const firstKnockoutRound = knockoutRounds[0];
-
-            if (tournament.knockoutQualifiers === 8) { // Quarter Finals (Ranks 1-8)
-                const pairings = [
-                    { homeRank: 1, awayRank: 8, match: 0 },
-                    { homeRank: 4, awayRank: 5, match: 1 },
-                    { homeRank: 2, awayRank: 7, match: 2 },
-                    { homeRank: 3, awayRank: 6, match: 3 }
-                ];
-                pairings.forEach(p => {
-                    const match = firstKnockoutRound.matches[p.match];
-                    if (match) {
-                        match.home = getTeamForSlot(p.homeRank);
-                        match.away = getTeamForSlot(p.awayRank);
-                    }
-                });
-            } else if (tournament.knockoutQualifiers === 4) { // Semi Finals (Ranks 1-4)
-                const pairings = [
-                    { homeRank: 1, awayRank: 4, match: 0 },
-                    { homeRank: 2, awayRank: 3, match: 1 }
-                ];
-                pairings.forEach(p => {
-                    const match = firstKnockoutRound.matches[p.match];
-                    if (match) {
-                        match.home = getTeamForSlot(p.homeRank);
-                        match.away = getTeamForSlot(p.awayRank);
-                    }
-                });
-            }
-            
-            // Update subsequent knockout rounds based on previous match winners
-            for (let i = 1; i < knockoutRounds.length; i++) {
-                const currentRound = knockoutRounds[i];
-                const prevRound = knockoutRounds[i - 1];
+        // ==================== ADVANCED STATS HANDLING ====================
+        const updateAdvancedStats = async (matchId, stats) => {
+            try {
+                const currentStats = (await statsRef.once('value')).val() || {};
+                const updatedStats = { ...currentStats };
                 
-                currentRound.matches.forEach((match, matchIndex) => {
-                    const prevMatch1Index = matchIndex * 2;
-                    const prevMatch2Index = matchIndex * 2 + 1;
-                    const prevMatch1 = prevRound.matches[prevMatch1Index];
-                    const prevMatch2 = prevRound.matches[prevMatch2Index];
-                    
-                    const winner1 = getMatchWinner(prevMatch1);
-                    const winner2 = getMatchWinner(prevMatch2);
-
-                    match.home = winner1 || `Winner of ${prevMatch1.group} Match ${prevMatch1Index + 1}`;
-                    match.away = winner2 || `Winner of ${prevMatch2.group} Match ${prevMatch2Index + 1}`;
-                });
-            }
-
-            // Find the index of the first knockout round in the full schedule
-            const startKnockoutIndex = newSchedule.findIndex(r => r.matches.some(m => m.knockout));
-
-            // Replace the old knockout rounds with the new ones
-            if (startKnockoutIndex !== -1) {
-                newSchedule.splice(startKnockoutIndex, knockoutRounds.length, ...knockoutRounds);
-                await tournamentRef.update({ schedule: newSchedule, lastUpdated: new Date().toISOString() });
+                if (stats.homeTeam && stats.homeStats) {
+                    updatedStats[stats.homeTeam] = {
+                        ...updatedStats[stats.homeTeam],
+                        passes: (updatedStats[stats.homeTeam]?.passes || 0) + (stats.homeStats.passes || 0),
+                        tackles: (updatedStats[stats.homeTeam]?.tackles || 0) + (stats.homeStats.tackles || 0),
+                        saves: (updatedStats[stats.homeTeam]?.saves || 0) + (stats.homeStats.saves || 0)
+                    };
+                }
+                
+                if (stats.awayTeam && stats.awayStats) {
+                    updatedStats[stats.awayTeam] = {
+                        ...updatedStats[stats.awayTeam],
+                        passes: (updatedStats[stats.awayTeam]?.passes || 0) + (stats.awayStats.passes || 0),
+                        tackles: (updatedStats[stats.awayTeam]?.tackles || 0) + (stats.awayStats.tackles || 0),
+                        saves: (updatedStats[stats.awayTeam]?.saves || 0) + (stats.awayStats.saves || 0)
+                    };
+                }
+                
+                await statsRef.set(updatedStats);
+                advancedStats = updatedStats;
+                
+                if (currentTab === 'stats' && tournamentData) {
+                    renderStats(tournamentData);
+                }
+                
+                return true;
+            } catch (error) {
+                console.error("Error updating advanced stats:", error);
+                return false;
             }
         };
 
-        const getMatchWinner = (match) => { 
-            if (!match || match.homeScore === null || match.awayScore === null) return null;
-            if (match.homeScore > match.awayScore) return match.home;
-            if (match.awayScore > match.awayScore) return match.away;
-            // Simple tie-breaker for KO stage if needed (e.g., higher seeded team wins) - currently not implemented. 
-            return null; 
-        };
-
-        // --- NEW HELPER FUNCTION ---
-        const getPlayerName = (teamName, players) => {
-            const playerName = players[teamName];
-            // Check if the team name is one of the placeholders for knockout rounds
-            if (playerName && !teamName.startsWith('Winner of') && !teamName.startsWith('TBD Rank')) {
-                // Class changed to text-white opacity-80
-                return `<span class="text-white text-xs opacity-80"> (${playerName})</span>`;
-            }
-            return '';
-        };
-
-        // --- RENDERING FUNCTIONS ---
-        const renderAdminManagementPanel = (tournament) => {
-            const container = document.getElementById('current-tournament-status');
-            if (!tournament) {
-                container.innerHTML = `
-                    <div class="p-4 bg-ucl-card border-l-4 border-ucl-highlight text-ucl-text">
-                        <p class="font-bold">No Active Tournament</p>
-                        <p class="text-sm">Use the 'Start New Tournament' section below to create a schedule.</p>
-                    </div>
-                `;
-                // Also ensure the results content is reset if no tournament is active
-                document.getElementById('admin-results-content').innerHTML = '<div class="text-center py-6 text-ucl-text">Generate a schedule above to start uploading results.</div>';
-                return;
-            }
-
-            const standingsResult = calculateStandings(tournament.teams, tournament.schedule);
-            const standings = standingsResult.overall;
-            const matchesPlayed = standings.reduce((sum, t) => sum + t.P, 0) / 2;
-            const totalMatches = tournament.schedule.reduce((sum, r) => sum + r.matches.length, 0);
-            const progress = totalMatches > 0 ?
-                ((matchesPlayed / totalMatches) * 100).toFixed(0) : 0;
-            const firstPlace = standings.length > 0 ? standings[0].team : 'N/A';
-
-            // Calculate Estimated End Date
-            const uniqueDates = [...new Set(tournament.schedule.map(r => r.date))].filter(d => d);
-            const estimatedEndDate = uniqueDates.length > 0 ? uniqueDates[uniqueDates.length - 1] : 'N/A';
-
-            container.innerHTML = `
-                <div class="p-4 bg-ucl-dark rounded-md border border-ucl-highlight/30 space-y-2">
-                    <p class="text-sm font-semibold text-ucl-text">Type: <span class="text-ucl-highlight">${tournament.type === 'league' ? 'League' : 'Group & Knockout'}</span></p>
-                    <p class="text-sm font-semibold text-ucl-text">Teams: <span class="text-ucl-highlight">${tournament.teams.length}</span></p>
-                    <p class="text-sm font-semibold text-ucl-text">Total Matches: <span class="text-ucl-highlight">${totalMatches}</span></p>
-                    <p class="text-sm font-semibold text-ucl-text">Matches Played: <span class="text-ucl-highlight">${matchesPlayed}</span></p>
-                    <p class="text-sm font-semibold text-ucl-text">Current Leader: <span class="text-ucl-highlight">${firstPlace}</span></p>
-                    <p class="text-sm font-semibold text-ucl-text">End Date: <span class="text-ucl-highlight">${estimatedEndDate}</span></p>
-                </div>
-                <div class="w-full bg-ucl-card rounded-full h-2.5 mt-4">
-                    <div class="bg-ucl-highlight h-2.5 rounded-full" style="width: ${progress}%"></div>
-                    <p class="text-xs text-ucl-text/70 text-center mt-1">${progress}% Complete</p>
-                </div>
-                <div class="flex justify-center mt-4">
-                    <button id="delete-tournament-btn" class="px-4 py-2 bg-ucl-highlight text-white font-semibold rounded-lg shadow-md hover:bg-ucl-highlight/80 transition duration-150 flex items-center">
-                        <i class="ph-bold ph-trash-simple text-lg mr-2"></i> Delete Tournament
-                    </button>
-                </div>
-            `;
-            document.getElementById('delete-tournament-btn').addEventListener('click', handleDeleteTournament);
-
-            // After rendering the management panel, ensure the results panel is loaded too
-            renderAdminResultsContent(tournament);
-        }
-
-        const renderAdminResultsContent = (tournament) => {
-            const container = document.getElementById('admin-results-content');
-            if (!isAdmin || !tournament || !tournament.schedule) {
-                container.innerHTML = '<div class="text-center py-6 text-ucl-text">Generate a schedule above to start uploading results.</div>';
-                return;
-            }
-            const scheduleData = tournament.schedule;
-            const players = tournament.players || {}; // Access players object // MODIFIED
-            let html = '';
-            
-            scheduleData.forEach(round => {
-                const isKnockout = round.matches.some(m => m.knockout);
-                const roundType = isKnockout ?
-                    (round.matches[0].group || 'Knockout Stage') : (round.matches[0].group ? 'Group Stage' : 'League Round');
-                
-                html += `
-                    <div class="bg-ucl-dark p-3 rounded-lg mt-4 shadow-inner">
-                        <h4 class="text-md font-bold text-ucl-highlight mb-3">Matchday ${round.round} (${round.date}) - ${roundType}</h4>
-                        <div class="space-y-2">
-                `;
-                
-                round.matches.forEach(match => {
-                    const homeScore = match.homeScore === null ? '' : match.homeScore;
-                    const awayScore = match.awayScore === null ? '' : match.awayScore;
-                    const matchGroup = match.group && !match.knockout ? `<span class="text-ucl-highlight/70 text-xs ml-1">(${match.group})</span>` : '';
-                    const homePlayerName = getPlayerName(match.home, players); // MODIFIED
-                    const awayPlayerName = getPlayerName(match.away, players); // MODIFIED
-
-                    html += `
-                        <form data-match-id="${match.id}" class="match-update-form flex items-center space-x-2 bg-ucl-card p-2 rounded-md border border-ucl-highlight/30">
-                            <div class="font-semibold text-ucl-text w-1/3 truncate flex items-center">${match.home}${homePlayerName} ${matchGroup}</div>
-                            <input type="number" min="0" value="${homeScore}" placeholder="0" class="w-12 p-1 text-center border rounded score-input-home focus:border-ucl-highlight bg-ucl-dark text-ucl-text">
-                            <span class="font-bold text-ucl-highlight">-</span>
-                            <input type="number" min="0" value="${awayScore}" placeholder="0" class="w-12 p-1 text-center border rounded score-input-away focus:border-ucl-highlight bg-ucl-dark text-ucl-text">
-                            <div class="font-semibold text-ucl-text w-1/3 text-right truncate">${match.away}${awayPlayerName}</div>
-                            <button type="submit" class="p-1 bg-ucl-highlight text-white rounded-md text-sm 
-                                hover:bg-ucl-highlight/80 transition duration-150 flex items-center justify-center">
-                                <i class="ph-bold ph-floppy-disk text-lg"></i>
-                            </button>
-                        </form>
-                    `;
-                    
-                });
-                html += `</div></div>`;
-            });
-
-            container.innerHTML = html;
-            document.querySelectorAll('.match-update-form').forEach(form => {
-                form.addEventListener('submit', handleUpdateResult);
-            });
-        };
-
-        // NEW: Function to handle switching of group tabs for fixtures
-        const handleGroupTabSwitch = (e) => {
-            const newGroup = e.currentTarget.getAttribute('data-group');
-            if (newGroup === activeGroup) return; // No change
-            
-            activeGroup = newGroup;
-            // Re-render the fixtures using the new active group
-            if (tournamentData) {
-                renderFixtures(tournamentData);
-            }
-        };
-
-        // NEW: Helper function for rendering Group Stage Fixtures for a single group
-        const renderGroupStageFixtures = (tournament, groupName) => {
-            const players = tournament.players || {};
-            // Filter the schedule to only include matches for the specified group AND are not knockout matches
-            const groupSchedule = tournament.schedule.filter(round => 
-                round.matches.some(match => match.group === groupName && !match.knockout)
-            );
-            
-            if (groupSchedule.length === 0) {
-                return `<div class="text-center py-6 text-ucl-text">No group stage matches generated for ${groupName} yet.</div>`;
-            }
-
-            let html = '';
-            groupSchedule.forEach(round => {
-                // Filter matches within the round for the specific group
-                const matchesInRound = round.matches.filter(m => m.group === groupName && !m.knockout);
-                
-                if (matchesInRound.length === 0) return; // Skip if no matches for this group in this round
-
-                html += `
-                    <div class="bg-ucl-dark p-4 rounded-lg mt-4 shadow-inner">
-                        <h4 class="text-lg font-bold text-ucl-highlight mb-3">Matchday ${round.round} (${round.date}) - ${groupName}</h4>
-                        <div class="space-y-2">
-                `;
-                
-                matchesInRound.forEach(match => {
-                    const homePlayerName = getPlayerName(match.home, players);
-                    const awayPlayerName = getPlayerName(match.away, players);
-                    const scoreDisplay = match.homeScore !== null ? `<span class="font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : '<span class="text-ucl-text/50 italic">vs</span>';
-                    const homeLogo = getTeamLogoHtml(match.home, 'w-6 h-6');
-                    const awayLogo = getTeamLogoHtml(match.away, 'w-6 h-6');
-                    const matchStyle = 'bg-ucl-card';
-
-                    html += `
-                        <div class="flex justify-between items-center ${matchStyle} p-3 rounded-md shadow-sm border border-ucl-highlight/30">
-                            <div class="font-semibold text-ucl-text w-1/3 flex items-center truncate">${homeLogo} ${match.home}${homePlayerName}</div>
-                            <div class="w-1/3 text-center">${scoreDisplay}</div>
-                            <div class="font-semibold text-ucl-text w-1/3 text-right flex items-center justify-end truncate">${match.away}${awayPlayerName} ${awayLogo}</div>
-                        </div>
-                    `;
-                });
-                
-                html += `</div></div>`;
-            });
-            return html;
-        }
-
-        // NEW: Helper function for rendering Knockout Fixtures
-        const renderKnockoutFixtures = (tournament) => {
-            const players = tournament.players || {};
-            // Filter the schedule to only include knockout matches
-            const knockoutSchedule = tournament.schedule.filter(round => 
-                round.matches.some(match => match.knockout)
-            );
-            
-            if (knockoutSchedule.length === 0) return '';
-            
-            let html = `
-                <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4 mt-6">
-                    <i class="ph-bold ph-trophy text-2xl mr-2 text-green-500"></i> Knockout Stage
-                </h3>
-            `;
-            
-            knockoutSchedule.forEach(round => {
-                const roundType = round.matches[0].group || 'Knockout Stage';
-                const roundClass = 'border-2 border-green-500 bg-green-500/10';
-                const roundHeaderClass = 'text-green-500';
-
-                html += `
-                    <div class="bg-ucl-dark p-4 rounded-lg mt-4 shadow-inner ${roundClass}">
-                        <h4 class="text-lg font-bold ${roundHeaderClass} mb-3">Matchday ${round.round} (${round.date}) - ${roundType}</h4>
-                        <div class="space-y-2">
-                `;
-                
-                round.matches.forEach(match => {
-                    const homePlayerName = getPlayerName(match.home, players);
-                    const awayPlayerName = getPlayerName(match.away, players);
-                    const scoreDisplay = match.homeScore !== null ? `<span class="font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : '<span class="text-ucl-text/50 italic">vs</span>';
-                    const homeLogo = getTeamLogoHtml(match.home, 'w-6 h-6');
-                    const awayLogo = getTeamLogoHtml(match.away, 'w-6 h-6');
-                    const matchStyle = 'bg-ucl-accent/40';
-
-                    html += `
-                        <div class="flex justify-between items-center ${matchStyle} p-3 rounded-md shadow-sm border border-green-500/50">
-                            <div class="font-semibold text-ucl-text w-1/3 flex items-center truncate">${homeLogo} ${match.home}${homePlayerName}</div>
-                            <div class="w-1/3 text-center">${scoreDisplay}</div>
-                            <div class="font-semibold text-ucl-text w-1/3 text-right flex items-center justify-end truncate">${match.away}${awayPlayerName} ${awayLogo}</div>
-                        </div>
-                    `;
-                });
-                
-                html += `</div></div>`;
-            });
-            return html;
-        }
-
-
+        // ==================== YOUR ORIGINAL RENDERING FUNCTIONS ====================
         const renderFixtures = (tournament) => {
             const container = document.getElementById('fixtures-content');
             const tabContainer = document.getElementById('group-tabs-container');
             const fixturesHeader = document.getElementById('fixtures-header');
             
             if (!tournament || !tournament.schedule) {
-                container.innerHTML = '<div class="text-center py-6 text-ucl-text">Tournament fixtures will appear here once the schedule is generated.</div>';
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="ph ph-calendar-blank text-5xl text-gray-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-400 mb-2">No Fixtures Available</h3>
+                        <p class="text-gray-500">Tournament fixtures will appear here once generated by admin.</p>
+                    </div>
+                `;
                 tabContainer.classList.add('hidden');
-                fixturesHeader.innerHTML = '<i class="ph-bold ph-calendar-check text-2xl mr-2 text-ucl-highlight"></i> Ongoing Matchday Fixtures';
+                fixturesHeader.innerHTML = 'Tournament Fixtures';
                 return;
             }
 
             if (tournament.type === 'league') {
-                // --- LEAGUE RENDER LOGIC ---
+                // League rendering
                 tabContainer.classList.add('hidden');
-                fixturesHeader.innerHTML = '<i class="ph-bold ph-calendar-check text-2xl mr-2 text-ucl-highlight"></i> League Fixtures';
+                fixturesHeader.innerHTML = 'League Fixtures';
                 
                 const players = tournament.players || {};
                 let html = '';
                 
                 tournament.schedule.forEach(round => {
                     html += `
-                        <div class="bg-ucl-dark p-4 rounded-lg mt-4 shadow-inner">
-                            <h4 class="text-lg font-bold text-ucl-highlight mb-3">Matchday ${round.round} (${round.date}) - League Round</h4>
-                            <div class="space-y-2">
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold text-white">Matchday ${round.round}</h3>
+                                <span class="text-gray-400">${round.date}</span>
+                            </div>
+                            <div class="space-y-3">
                     `;
                     
                     round.matches.forEach(match => {
                         const homePlayerName = getPlayerName(match.home, players);
                         const awayPlayerName = getPlayerName(match.away, players);
-                        const scoreDisplay = match.homeScore !== null ? `<span class="font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : '<span class="text-ucl-text/50 italic">vs</span>';
-                        const homeLogo = getTeamLogoHtml(match.home, 'w-6 h-6');
-                        const awayLogo = getTeamLogoHtml(match.away, 'w-6 h-6');
+                        const scoreDisplay = match.homeScore !== null ? 
+                            `<span class="text-2xl font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : 
+                            '<span class="text-lg font-bold text-gray-300">VS</span>';
+                        const homeLogo = getTeamLogoHtml(match.home, 'w-8 h-8');
+                        const awayLogo = getTeamLogoHtml(match.away, 'w-8 h-8');
 
                         html += `
-                            <div class="flex justify-between items-center bg-ucl-card p-3 rounded-md shadow-sm border border-ucl-highlight/30">
-                                <div class="font-semibold text-ucl-text w-1/3 flex items-center truncate">${homeLogo} ${match.home}${homePlayerName}</div>
-                                <div class="w-1/3 text-center">${scoreDisplay}</div>
-                                <div class="font-semibold text-ucl-text w-1/3 text-right flex items-center justify-end truncate">${match.away}${awayPlayerName} ${awayLogo}</div>
+                            <div class="match-card league-match p-4 rounded-xl">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center flex-1">
+                                        ${homeLogo}
+                                        <div class="ml-3">
+                                            <div class="font-semibold text-white">${match.home}</div>
+                                            <div class="text-sm text-gray-400">${players[match.home] || ''}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mx-4 text-center">
+                                        ${scoreDisplay}
+                                        <div class="text-xs text-gray-500 mt-1">${match.homeScore !== null ? 'FT' : match.date}</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center flex-1 justify-end">
+                                        <div class="mr-3 text-right">
+                                            <div class="font-semibold text-white">${match.away}</div>
+                                            <div class="text-sm text-gray-400">${players[match.away] || ''}</div>
+                                        </div>
+                                        ${awayLogo}
+                                    </div>
+                                </div>
                             </div>
                         `;
                     });
@@ -1617,187 +1453,409 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
                 container.innerHTML = html;
                 
             } else if (tournament.type === 'group_knockout' && tournament.groups) {
-                // --- GROUP & KNOCKOUT RENDER LOGIC ---
+                // Group & Knockout rendering
                 tabContainer.classList.remove('hidden');
-                fixturesHeader.innerHTML = '<i class="ph-bold ph-calendar-check text-2xl mr-2 text-ucl-highlight"></i> Tournament Fixtures';
+                fixturesHeader.innerHTML = 'Tournament Fixtures';
                 
                 const groups = Object.keys(tournament.groups).sort();
                 
-                // 1. Render Group Tabs
-                let tabsHtml = '<div class="flex flex-wrap justify-center sm:justify-start">';
-                
-                // Initialize activeGroup if not set or if the current active group doesn't exist anymore
+                // Initialize activeGroup if not set
                 if (!activeGroup || !groups.includes(activeGroup)) {
                     activeGroup = groups[0];
                 }
 
+                // Render Group Tabs
+                let tabsHtml = '<div class="flex flex-wrap justify-center sm:justify-start gap-2">';
                 groups.forEach(groupName => {
                     const isActive = groupName === activeGroup;
                     const tabClass = isActive ? 
-                        'bg-ucl-highlight text-white border-ucl-highlight' : 
-                        'bg-ucl-dark/50 text-ucl-text border-transparent hover:bg-ucl-dark';
-
+                        'gradient-bg text-white' : 
+                        'bg-surface text-gray-400 hover:bg-surface/80';
+                    
                     tabsHtml += `
-                        <div data-group="${groupName}" class="group-tab-button flex-1 py-2 px-4 rounded-lg text-sm font-semibold border-2 ${tabClass} transition duration-150 cursor-pointer text-center min-w-[70px] sm:min-w-0 mx-0.5">
+                        <button data-group="${groupName}" 
+                            class="group-tab-button px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${tabClass}">
                             ${groupName}
-                        </div>
+                        </button>
                     `;
                 });
                 tabsHtml += '</div>';
                 tabContainer.innerHTML = tabsHtml;
 
-                // Add event listeners to the new tabs
+                // Add event listeners to group tabs
                 document.querySelectorAll('.group-tab-button').forEach(btn => {
-                    btn.removeEventListener('click', handleGroupTabSwitch); 
-                    btn.addEventListener('click', handleGroupTabSwitch);
+                    btn.addEventListener('click', (e) => {
+                        activeGroup = e.currentTarget.getAttribute('data-group');
+                        renderFixtures(tournament);
+                    });
                 });
 
-                // 2. Render Fixtures (Group Stage for active group + Knockout)
-                let fixturesHtml = `
-                    <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4 mt-6">
-                        <i class="ph-bold ph-users-three text-2xl mr-2 text-ucl-highlight"></i> ${activeGroup} Group Stage Fixtures
-                    </h3>
-                    ${renderGroupStageFixtures(tournament, activeGroup)}
-                    ${renderKnockoutFixtures(tournament)}
-                `;
-                container.innerHTML = fixturesHtml;
+                // Render fixtures for active group
+                const players = tournament.players || {};
+                let fixturesHtml = '';
+                
+                // Group Stage fixtures
+                const groupSchedule = tournament.schedule.filter(round => 
+                    round.matches.some(match => match.group === activeGroup && !match.knockout)
+                );
+                
+                if (groupSchedule.length > 0) {
+                    fixturesHtml += `<h3 class="text-xl font-bold text-white mb-4">${activeGroup} Group Stage</h3>`;
+                    
+                    groupSchedule.forEach(round => {
+                        const matchesInRound = round.matches.filter(m => m.group === activeGroup && !m.knockout);
+                        if (matchesInRound.length === 0) return;
+                        
+                        fixturesHtml += `
+                            <div class="mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-white">Matchday ${round.round}</h4>
+                                    <span class="text-gray-400">${round.date}</span>
+                                </div>
+                                <div class="space-y-3">
+                        `;
+                        
+                        matchesInRound.forEach(match => {
+                            const homePlayerName = getPlayerName(match.home, players);
+                            const awayPlayerName = getPlayerName(match.away, players);
+                            const scoreDisplay = match.homeScore !== null ? 
+                                `<span class="text-2xl font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : 
+                                '<span class="text-lg font-bold text-gray-300">VS</span>';
+                            const homeLogo = getTeamLogoHtml(match.home, 'w-8 h-8');
+                            const awayLogo = getTeamLogoHtml(match.away, 'w-8 h-8');
 
-            } else {
-                 // Fallback
-                 container.innerHTML = '<div class="text-center py-6 text-ucl-text">Tournament fixtures will appear here once the schedule is generated.</div>';
-                 tabContainer.classList.add('hidden');
+                            fixturesHtml += `
+                                <div class="match-card group-match p-4 rounded-xl">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center flex-1">
+                                            ${homeLogo}
+                                            <div class="ml-3">
+                                                <div class="font-semibold text-white">${match.home}</div>
+                                                <div class="text-sm text-gray-400">${players[match.home] || ''}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mx-4 text-center">
+                                            ${scoreDisplay}
+                                            <div class="text-xs text-gray-500 mt-1">${match.homeScore !== null ? 'FT' : match.date}</div>
+                                        </div>
+                                        
+                                        <div class="flex items-center flex-1 justify-end">
+                                            <div class="mr-3 text-right">
+                                                <div class="font-semibold text-white">${match.away}</div>
+                                                <div class="text-sm text-gray-400">${players[match.away] || ''}</div>
+                                            </div>
+                                            ${awayLogo}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        fixturesHtml += `</div></div>`;
+                    });
+                }
+
+                // Knockout fixtures
+                const knockoutSchedule = tournament.schedule.filter(round => 
+                    round.matches.some(match => match.knockout)
+                );
+                
+                if (knockoutSchedule.length > 0) {
+                    fixturesHtml += `<h3 class="text-xl font-bold text-white mb-4 mt-8">Knockout Stage</h3>`;
+                    
+                    knockoutSchedule.forEach(round => {
+                        const roundType = round.matches[0].group || 'Knockout Stage';
+                        
+                        fixturesHtml += `
+                            <div class="mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-white">${roundType} - Matchday ${round.round}</h4>
+                                    <span class="text-gray-400">${round.date}</span>
+                                </div>
+                                <div class="space-y-3">
+                        `;
+                        
+                        round.matches.forEach(match => {
+                            const homePlayerName = getPlayerName(match.home, players);
+                            const awayPlayerName = getPlayerName(match.away, players);
+                            const scoreDisplay = match.homeScore !== null ? 
+                                `<span class="text-2xl font-bold text-white">${match.homeScore} - ${match.awayScore}</span>` : 
+                                '<span class="text-lg font-bold text-gray-300">VS</span>';
+                            const homeLogo = getTeamLogoHtml(match.home, 'w-8 h-8');
+                            const awayLogo = getTeamLogoHtml(match.away, 'w-8 h-8');
+
+                            fixturesHtml += `
+                                <div class="match-card knockout-match p-4 rounded-xl">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center flex-1">
+                                            ${homeLogo}
+                                            <div class="ml-3">
+                                                <div class="font-semibold text-white">${match.home}</div>
+                                                <div class="text-sm text-gray-400">${players[match.home] || ''}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mx-4 text-center">
+                                            ${scoreDisplay}
+                                            <div class="text-xs text-gray-500 mt-1">${match.homeScore !== null ? 'FT' : match.date}</div>
+                                        </div>
+                                        
+                                        <div class="flex items-center flex-1 justify-end">
+                                            <div class="mr-3 text-right">
+                                                <div class="font-semibold text-white">${match.away}</div>
+                                                <div class="text-sm text-gray-400">${players[match.away] || ''}</div>
+                                            </div>
+                                            ${awayLogo}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        fixturesHtml += `</div></div>`;
+                    });
+                }
+                
+                container.innerHTML = fixturesHtml;
             }
         };
 
-
-        const renderPointsTable = (standingsResult, players, tournamentType) => {
+        const renderPointsTable = (tournament) => {
             const container = document.getElementById('points-table-content');
             const header = document.getElementById('points-header');
-
-            if (standingsResult.overall.length === 0) {
-                container.innerHTML = '<div class="text-center py-6 text-ucl-text">Upload results in the Admin tab to populate the points table.</div>';
-                header.innerHTML = '<i class="ph-bold ph-list-numbers text-2xl mr-2 text-ucl-highlight"></i> Official Points Table';
+            
+            if (!tournament || !tournament.teams) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="ph ph-table text-5xl text-gray-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-400 mb-2">No Standings Available</h3>
+                        <p class="text-gray-500">Standings will appear here once matches are played.</p>
+                    </div>
+                `;
                 return;
             }
-
-            // MODIFIED: Header for points table
-            header.innerHTML = `<i class="ph-bold ph-list-numbers text-2xl mr-2 text-ucl-highlight"></i> ${tournamentType === 'league' ? 'League Standings' : 'Group Stage Standings'}`;
-
-            const renderTable = (standings, showGroup = false) => {
-                // Determine the rank threshold for highlighting (Top 4 for league, top 2 per group for KO stage)
-                const rankHighlightLimit = tournamentType === 'group_knockout' ? 2 : 4;
-                const tableHeader = `
-                    <table class="min-w-full divide-y divide-ucl-highlight/30 shadow overflow-hidden sm:rounded-lg">
-                        <thead class="bg-ucl-header-bar">
-                            <tr>
-                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">#</th>
-                                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Team</th>
-                                ${showGroup ? '<th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Grp</th>' : ''}
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">P</th>
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider hidden sm:table-cell">W</th>
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider hidden sm:table-cell">D</th>
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider hidden sm:table-cell">L</th>
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">GD</th>
-                                <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-white uppercase tracking-wider">Pts</th>
+            
+            // Calculate standings using YOUR original function
+            const standingsResult = calculateStandings(tournament.teams, tournament.schedule);
+            const standings = standingsResult.overall;
+            
+            // Update header
+            header.innerHTML = tournament.type === 'league' ? 'League Standings' : 'Group Stage Standings';
+            
+            const renderTable = (standingsData, showGroup = false) => {
+                let html = `
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-surface/50">
+                                <th class="py-3 px-4 text-left text-gray-400 font-semibold">#</th>
+                                <th class="py-3 px-4 text-left text-gray-400 font-semibold">Team</th>
+                                ${showGroup ? '<th class="py-3 px-4 text-center text-gray-400 font-semibold">Grp</th>' : ''}
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold">P</th>
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold hidden sm:table-cell">W</th>
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold hidden sm:table-cell">D</th>
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold hidden sm:table-cell">L</th>
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold">GD</th>
+                                <th class="py-3 px-4 text-center text-gray-400 font-semibold">Pts</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-ucl-card divide-y divide-ucl-highlight/20">
+                        <tbody>
                 `;
-
-                const rows = standings.map((team, index) => {
+                
+                standingsData.forEach((team, index) => {
                     const rank = index + 1;
-                    const logoHtml = getTeamLogoHtml(team.team, 'w-5 h-5');
-                    const playerName = players[team.team] || '';
-                    // Highlight top qualifying teams
-                    const rowBg = rank <= rankHighlightLimit ? 'bg-green-600/10' : (rank >= standings.length - 2 && tournamentType === 'league' ? 'bg-red-600/10' : '');
-
-                    return `
-                        <tr class="${rowBg}">
-                            <td class="px-3 py-4 whitespace-nowrap text-sm font-bold text-center text-ucl-highlight">${rank}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-ucl-text flex items-center">
-                                ${logoHtml} ${team.team} <span class="text-white text-xs opacity-80 ml-2 block sm:inline">(${playerName})</span>
+                    const logoHtml = getTeamLogoHtml(team.team, 'w-6 h-6');
+                    const playerName = tournament.players[team.team] || '';
+                    
+                    // Highlight top teams
+                    const rowBg = rank <= 4 ? 'rank-1' : 
+                                 rank >= standingsData.length - 2 && tournament.type === 'league' ? 'bg-red-600/10' : '';
+                    
+                    html += `
+                        <tr class="border-b border-gray-800/50 hover:bg-surface/30 transition-colors ${rowBg}">
+                            <td class="py-4 px-4">
+                                <div class="flex items-center">
+                                    <span class="text-lg font-bold ${rank <= 4 ? 'text-white' : 'text-gray-400'}">${rank}</span>
+                                    ${rank <= 3 ? `
+                                        <i class="ph ph-crown ml-2 ${rank === 1 ? 'text-yellow-400' : rank === 2 ? 'text-gray-300' : 'text-yellow-800'}"></i>
+                                    ` : ''}
+                                </div>
                             </td>
-                            ${showGroup ? `<td class="px-3 py-4 whitespace-nowrap text-sm text-center font-bold text-ucl-highlight">${team.group}</td>` : ''}
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center">${team.P}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center hidden sm:table-cell">${team.W}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center hidden sm:table-cell">${team.D}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center hidden sm:table-cell">${team.L}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center font-bold text-ucl-highlight">${team.GD > 0 ?
-                                '+' : ''}${team.GD}</td>
-                            <td class="px-3 py-4 whitespace-nowrap text-sm text-center font-extrabold text-ucl-highlight">${team.Pts}</td>
+                            <td class="py-4 px-4">
+                                <div class="flex items-center">
+                                    ${logoHtml}
+                                    <div>
+                                        <div class="font-semibold text-white">${team.team}</div>
+                                        <div class="text-sm text-gray-400">${playerName}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            ${showGroup ? `<td class="py-4 px-4 text-center font-bold text-accent">${team.group}</td>` : ''}
+                            <td class="py-4 px-4 text-center text-white">${team.P}</td>
+                            <td class="py-4 px-4 text-center text-white hidden sm:table-cell">${team.W}</td>
+                            <td class="py-4 px-4 text-center text-white hidden sm:table-cell">${team.D}</td>
+                            <td class="py-4 px-4 text-center text-white hidden sm:table-cell">${team.L}</td>
+                            <td class="py-4 px-4 text-center font-bold ${team.GD > 0 ? 'text-success' : team.GD < 0 ? 'text-danger' : 'text-white'}">
+                                ${team.GD > 0 ? '+' : ''}${team.GD}
+                            </td>
+                            <td class="py-4 px-4 text-center font-extrabold text-accent">${team.Pts}</td>
                         </tr>
                     `;
                 });
-
-                return tableHeader + rows.join('') + '</tbody></table>';
+                
+                html += `</tbody></table>`;
+                return html;
             };
 
-            // MODIFIED: Renders separate tables for each group
-            if (tournamentType === 'group_knockout' && Object.keys(standingsResult.byGroup).length > 0) {
+            // Group stage has separate tables for each group
+            if (tournament.type === 'group_knockout' && Object.keys(standingsResult.byGroup).length > 0) {
                 let html = '';
                 for (const groupName in standingsResult.byGroup) {
                     html += `
-                        <h3 class="text-xl font-bold text-white section-header-bg p-3 rounded-lg flex items-center mb-4 mt-6">
-                            <i class="ph-bold ph-users-three text-xl mr-2 text-ucl-highlight"></i> ${groupName} Standings
-                        </h3>
+                        <h3 class="text-xl font-bold text-white mb-4 mt-6">${groupName} Standings</h3>
                         ${renderTable(standingsResult.byGroup[groupName], false)}
                     `;
                 }
                 container.innerHTML = html;
             } else {
-                container.innerHTML = renderTable(standingsResult.overall, false);
+                container.innerHTML = renderTable(standings, false);
             }
         };
 
-        const renderStats = (standingsResult, players) => {
-            const scorersList = document.getElementById('scorers-list');
-            const defenseList = document.getElementById('defense-list');
-            const statsMisc = document.getElementById('stats-misc');
+        const renderStats = async (tournament) => {
+            if (!tournament) return;
             
-            scorersList.innerHTML = '';
-            defenseList.innerHTML = '';
-
-            if (standingsResult.overall.length === 0) {
-                scorersList.innerHTML = '<li class="text-ucl-text/70 text-center py-2">No match results available.</li>';
-                defenseList.innerHTML = '<li class="text-ucl-text/70 text-center py-2">No match results available.</li>';
-                statsMisc.textContent = '';
-                return;
-            }
-
+            // Get advanced stats
+            const statsSnapshot = await statsRef.once('value');
+            const stats = statsSnapshot.val() || {};
+            
+            // Calculate standings using YOUR original function
+            const standingsResult = calculateStandings(tournament.teams, tournament.schedule);
             const allTeams = standingsResult.overall;
-
-            // 1. Top Scorers (Most Goals For - GF)
+            
+            // YOUR ORIGINAL GOLDEN BOOT (Top Scorers by GF)
+            const scorersList = document.getElementById('scorers-list');
             const topScorers = [...allTeams].sort((a, b) => b.GF - a.GF).slice(0, 5);
-            topScorers.forEach((team, index) => {
-                const playerName = players[team.team] || '';
-                scorersList.innerHTML += `
-                    <li class="flex justify-between items-center py-1 border-b border-ucl-highlight/10">
-                        <span class="font-bold text-ucl-highlight mr-2">${index + 1}.</span>
-                        <span class="flex-1 truncate">${team.team} <span class="text-ucl-text/50 text-xs">(${playerName})</span></span>
-                        <span class="font-bold text-ucl-highlight">${team.GF} GF</span>
+            
+            scorersList.innerHTML = topScorers.map((team, index) => {
+                const playerName = tournament.players[team.team] || '';
+                return `
+                    <li class="flex justify-between items-center py-2 border-b border-gray-700/30">
+                        <div class="flex items-center">
+                            <span class="font-bold text-accent mr-3">${index + 1}.</span>
+                            <div class="w-6 h-6 mr-2">
+                                ${getTeamLogoHtml(team.team, 'w-full h-full')}
+                            </div>
+                            <span class="text-white">${team.team}</span>
+                            <span class="text-gray-400 text-xs ml-2">(${playerName})</span>
+                        </div>
+                        <span class="font-bold text-success">${team.GF} GF</span>
                     </li>
                 `;
-            });
-
-            // 2. Best Defense (Fewest Goals Against - GA)
+            }).join('');
+            
+            // YOUR ORIGINAL BEST DEFENSE (Fewest Goals Against)
+            const defenseList = document.getElementById('defense-list');
             const bestDefense = [...allTeams].sort((a, b) => {
-                if (a.GA !== b.GA) return a.GA - b.GA; // Lower GA is better
-                if (b.GD !== a.GD) return b.GD - a.GD; // Tie-breaker: Better GD
-                return b.Pts - a.Pts; // Secondary tie-breaker: Points
+                if (a.GA !== b.GA) return a.GA - b.GA;
+                if (b.GD !== a.GD) return b.GD - a.GD;
+                return b.Pts - a.Pts;
             }).slice(0, 5);
             
-            bestDefense.forEach((team, index) => {
-                const playerName = players[team.team] || '';
-                defenseList.innerHTML += `
-                    <li class="flex justify-between items-center py-1 border-b border-ucl-highlight/10">
-                        <span class="font-bold text-ucl-highlight mr-2">${index + 1}.</span>
-                        <span class="flex-1 truncate">${team.team} <span class="text-ucl-text/50 text-xs">(${playerName})</span></span>
-                        <span class="font-bold text-ucl-highlight">${team.GA} GA</span>
+            defenseList.innerHTML = bestDefense.map((team, index) => {
+                const playerName = tournament.players[team.team] || '';
+                return `
+                    <li class="flex justify-between items-center py-2 border-b border-gray-700/30">
+                        <div class="flex items-center">
+                            <span class="font-bold text-accent mr-3">${index + 1}.</span>
+                            <div class="w-6 h-6 mr-2">
+                                ${getTeamLogoHtml(team.team, 'w-full h-full')}
+                            </div>
+                            <span class="text-white">${team.team}</span>
+                            <span class="text-gray-400 text-xs ml-2">(${playerName})</span>
+                        </div>
+                        <span class="font-bold text-danger">${team.GA} GA</span>
                     </li>
                 `;
-            });
+            }).join('');
             
-            // 3. Miscellaneous Stats
+            // NEW: Most Passes
+            const passesList = document.getElementById('passes-list');
+            const passesData = Object.entries(stats)
+                .map(([team, data]) => ({
+                    team,
+                    passes: data.passes || 0,
+                    player: tournament.players[team] || ''
+                }))
+                .sort((a, b) => b.passes - a.passes)
+                .slice(0, 5);
+            
+            passesList.innerHTML = passesData.map((item, index) => `
+                <li class="flex justify-between items-center py-2 border-b border-gray-700/30">
+                    <div class="flex items-center">
+                        <span class="font-bold text-accent mr-3">${index + 1}.</span>
+                        <div class="w-6 h-6 mr-2">
+                            ${getTeamLogoHtml(item.team, 'w-full h-full')}
+                        </div>
+                        <span class="text-white">${item.team}</span>
+                        <span class="text-gray-400 text-xs ml-2">(${item.player})</span>
+                    </div>
+                    <span class="font-bold text-accent">${item.passes}</span>
+                </li>
+            `).join('');
+            
+            // NEW: Most Tackles
+            const tacklesList = document.getElementById('tackles-list');
+            const tacklesData = Object.entries(stats)
+                .map(([team, data]) => ({
+                    team,
+                    tackles: data.tackles || 0,
+                    player: tournament.players[team] || ''
+                }))
+                .sort((a, b) => b.tackles - a.tackles)
+                .slice(0, 5);
+            
+            tacklesList.innerHTML = tacklesData.map((item, index) => `
+                <li class="flex justify-between items-center py-2 border-b border-gray-700/30">
+                    <div class="flex items-center">
+                        <span class="font-bold text-accent mr-3">${index + 1}.</span>
+                        <div class="w-6 h-6 mr-2">
+                            ${getTeamLogoHtml(item.team, 'w-full h-full')}
+                        </div>
+                        <span class="text-white">${item.team}</span>
+                        <span class="text-gray-400 text-xs ml-2">(${item.player})</span>
+                    </div>
+                    <span class="font-bold text-warning">${item.tackles}</span>
+                </li>
+            `).join('');
+            
+            // NEW: Most Saves
+            const savesList = document.getElementById('saves-list');
+            const savesData = Object.entries(stats)
+                .map(([team, data]) => ({
+                    team,
+                    saves: data.saves || 0,
+                    player: tournament.players[team] || ''
+                }))
+                .sort((a, b) => b.saves - a.saves)
+                .slice(0, 5);
+            
+            savesList.innerHTML = savesData.map((item, index) => `
+                <li class="flex justify-between items-center py-2 border-b border-gray-700/30">
+                    <div class="flex items-center">
+                        <span class="font-bold text-accent mr-3">${index + 1}.</span>
+                        <div class="w-6 h-6 mr-2">
+                            ${getTeamLogoHtml(item.team, 'w-full h-full')}
+                        </div>
+                        <span class="text-white">${item.team}</span>
+                        <span class="text-gray-400 text-xs ml-2">(${item.player})</span>
+                    </div>
+                    <span class="font-bold text-purple-400">${item.saves}</span>
+                </li>
+            `).join('');
+            
+            // YOUR ORIGINAL MISCELLANEOUS STATS
+            const statsMisc = document.getElementById('stats-misc');
             const totalMatchesPlayed = allTeams.reduce((sum, t) => sum + t.P, 0) / 2;
             const totalGoalsScored = allTeams.reduce((sum, t) => sum + t.GF, 0);
             const avgGoalsPerMatch = totalMatchesPlayed > 0 ? (totalGoalsScored / totalMatchesPlayed).toFixed(2) : 0;
@@ -1805,97 +1863,393 @@ if (teamsCount % groupsCount !== 0 || (groupsCount > 1 && groupsCount % 2 !== 0)
             statsMisc.textContent = `Overall: ${totalGoalsScored} goals scored in ${totalMatchesPlayed} matches. Average: ${avgGoalsPerMatch} goals per match.`;
         };
 
-
-        // --- FIREBASE REALTIME LISTENER ---
-        const setupRealtimeListener = () => {
-            tournamentRef.on('value', async (snapshot) => {
-                const data = snapshot.val();
-                
-                // CRITICAL FIX: Update the global tournamentData first
-                tournamentData = data; 
-
-                if (data) {
-                    // Calculations are done on the client side based on the latest data
-                    const standings = calculateStandings(data.teams, data.schedule);
-                    
-                    // Update Knockout Bracket if conditions met (e.g., group stage complete)
-                    if (data.type === 'group_knockout') {
-                        // This will update the database if changes are needed
-                        await updateKnockoutBracket(data, standings); 
-                    }
-                    
-                    // Always render visible tabs on data change
-                    renderFixtures(data);
-                    renderPointsTable(standings, data.players, data.type);
-                    
-                    // Render Admin Panel Status (if logged in or if admin tab is active)
-                    if (isAdmin || currentTab === 'admin') {
-                         renderAdminManagementPanel(data);
-                    }
-                    
-                    // Only re-render stats if the stats tab is active
-                    if (currentTab === 'stats') {
-                        renderStats(standings, data.players);
-                    }
-                } else {
-                    // Handle case where database is empty (tournament deleted)
-                    
-                    renderFixtures(null);
-                    renderPointsTable({ overall: [], byGroup: {} }, null, 'league');
-                    
-                    if (isAdmin || currentTab === 'admin') {
-                         renderAdminManagementPanel(null);
-                        // Show 'No Active Tournament'
-                    }
-                    if (currentTab === 'stats') {
-                        renderStats({ overall: [], byGroup: {} });
-                    }
-                }
-            }, (error) => {
-                console.error("Realtime database error:", error);
-                alert("Could not connect to the database. Check console.");
-            });
-// Add this inside setupRealtimeListener
-        database.ref('tournament/news').on('value', (snapshot) => {
-            renderNewsStrip(snapshot.val());
-        });
-
-        // Add this inside initializeApp
-        document.getElementById('save-news-btn').addEventListener('click', saveNewsToDatabase);
-        };
-        // --- START APP ---
-        initializeApp();
-        // News Event Listeners
-            document.getElementById('publish-news-btn').addEventListener('click', () => {
-                const newsText = document.getElementById('admin-news-input').value.trim();
-                if (newsText) {
-                    database.ref('tournament/news').set(newsText);
-                    showMessage('start-message', 'News Published!', false);
-                    document.getElementById('admin-news-input').value = '';
-                } else {
-                    showMessage('start-message', 'Please enter some news text first.', true);
-                }
-            });
-
-            document.getElementById('clear-news-btn').addEventListener('click', () => {
-                database.ref('tournament/news').remove();
-                showMessage('start-message', 'News strip cleared.', false);
-            });
-       setupRealtimeListener();
-// Listen for news updates
-        database.ref('tournament/news').on('value', (snapshot) => {
-            const news = snapshot.val();
-            const container = document.getElementById('news-strip-container');
-            const textElement = document.getElementById('news-text');
+        // ==================== ADMIN RESULTS UPLOAD ====================
+        const renderAdminResultsContent = (tournament) => {
+            const container = document.getElementById('admin-results-content');
             
-            if (news && news.trim() !== "") {
-                textElement.textContent = news;
-                container.classList.remove('hidden');
-            } else {
-                container.classList.add('hidden');
+            if (!tournament || !tournament.schedule) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <p class="text-gray-400">No tournament data available.</p>
+                    </div>
+                `;
+                return;
             }
-        });
+            
+            let html = '';
+            
+            tournament.schedule.forEach(round => {
+                html += `
+                    <div class="mb-8">
+                        <h4 class="text-lg font-bold text-white mb-4">${round.date} - Matchday ${round.round}</h4>
+                        <div class="space-y-4">
+                `;
+                
+                round.matches.forEach(match => {
+                    const matchGroup = match.group && !match.knockout ? `<span class="text-gray-500 text-sm ml-2">(${match.group})</span>` : '';
+                    
+                    html += `
+                        <div class="bg-surface p-4 rounded-xl">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center">
+                                    ${getTeamLogoHtml(match.home, 'w-8 h-8')}
+                                    <div>
+                                        <span class="font-semibold text-white">${match.home}</span>
+                                        ${matchGroup}
+                                        <div class="text-sm text-gray-400">${tournament.players[match.home] || ''}</div>
+                                    </div>
+                                </div>
+                                <div class="text-gray-400 mx-4">vs</div>
+                                <div class="flex items-center">
+                                    <div class="text-right mr-3">
+                                        <span class="font-semibold text-white">${match.away}</span>
+                                        <div class="text-sm text-gray-400">${tournament.players[match.away] || ''}</div>
+                                    </div>
+                                    ${getTeamLogoHtml(match.away, 'w-8 h-8')}
+                                </div>
+                            </div>
+                            
+                            <form data-match-id="${match.id}" class="space-y-4">
+                                <!-- Scores -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">${match.home} Score</label>
+                                        <input type="number" min="0" value="${match.homeScore || ''}" 
+                                            class="score-input w-full px-3 py-2 rounded-lg">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">${match.away} Score</label>
+                                        <input type="number" min="0" value="${match.awayScore || ''}" 
+                                            class="score-input w-full px-3 py-2 rounded-lg">
+                                    </div>
+                                </div>
+                                
+                                <!-- Advanced Stats -->
+                                <div class="border-t border-gray-800 pt-4 mt-4">
+                                    <h5 class="text-sm font-semibold text-gray-400 mb-3">Advanced Statistics</h5>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 mb-3">
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.home} Passes</label>
+                                            <input type="number" min="0" value="${match.homePasses || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Passes">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.away} Passes</label>
+                                            <input type="number" min="0" value="${match.awayPasses || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Passes">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4 mb-3">
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.home} Tackles</label>
+                                            <input type="number" min="0" value="${match.homeTackles || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Tackles">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.away} Tackles</label>
+                                            <input type="number" min="0" value="${match.awayTackles || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Tackles">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.home} Saves</label>
+                                            <input type="number" min="0" value="${match.homeSaves || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Saves">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs text-gray-500 mb-1">${match.away} Saves</label>
+                                            <input type="number" min="0" value="${match.awaySaves || ''}" 
+                                                class="stat-input w-full px-3 py-2 rounded-lg" placeholder="Saves">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" 
+                                    class="w-full gradient-bg text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300">
+                                    <i class="ph ph-floppy-disk mr-2"></i> Save Result
+                                </button>
+                            </form>
+                        </div>
+                    `;
+                });
+                
+                html += `</div></div>`;
+            });
+            
+            container.innerHTML = html;
+            
+            // Add event listeners to result forms
+            container.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', handleResultUpdate);
+            });
+        };
 
+        const handleResultUpdate = async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const matchId = form.getAttribute('data-match-id');
+            const inputs = form.querySelectorAll('input');
+            
+            // Extract data from form
+            const homeScore = parseInt(inputs[0].value) || null;
+            const awayScore = parseInt(inputs[1].value) || null;
+            const homePasses = parseInt(inputs[2].value) || 0;
+            const awayPasses = parseInt(inputs[3].value) || 0;
+            const homeTackles = parseInt(inputs[4].value) || 0;
+            const awayTackles = parseInt(inputs[5].value) || 0;
+            const homeSaves = parseInt(inputs[6].value) || 0;
+            const awaySaves = parseInt(inputs[7].value) || 0;
+            
+            try {
+                // Update match in schedule
+                const newSchedule = [...tournamentData.schedule];
+                let matchUpdated = false;
+                let homeTeam = null;
+                let awayTeam = null;
+                
+                newSchedule.forEach(round => {
+                    round.matches.forEach(match => {
+                        if (match.id === matchId) {
+                            match.homeScore = homeScore;
+                            match.awayScore = awayScore;
+                            match.homePasses = homePasses;
+                            match.awayPasses = awayPasses;
+                            match.homeTackles = homeTackles;
+                            match.awayTackles = awayTackles;
+                            match.homeSaves = homeSaves;
+                            match.awaySaves = awaySaves;
+                            matchUpdated = true;
+                            homeTeam = match.home;
+                            awayTeam = match.away;
+                        }
+                    });
+                });
+                
+                if (matchUpdated) {
+                    await tournamentRef.update({
+                        schedule: newSchedule,
+                        lastUpdated: new Date().toISOString()
+                    });
+                    
+                    // Update advanced stats
+                    if (homeTeam && awayTeam) {
+                        await updateAdvancedStats(matchId, {
+                            homeTeam: homeTeam,
+                            awayTeam: awayTeam,
+                            homeStats: {
+                                passes: homePasses,
+                                tackles: homeTackles,
+                                saves: homeSaves
+                            },
+                            awayStats: {
+                                passes: awayPasses,
+                                tackles: awayTackles,
+                                saves: awaySaves
+                            }
+                        });
+                    }
+                    
+                    // Visual feedback
+                    const button = form.querySelector('button');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="ph ph-check-circle mr-2"></i> Saved!';
+                    button.classList.remove('gradient-bg');
+                    button.classList.add('bg-success');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.classList.remove('bg-success');
+                        button.classList.add('gradient-bg');
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error("Error updating result:", error);
+                alert("Failed to save result. Check console.");
+            }
+        };
+
+        // ==================== NEWS MANAGEMENT ====================
+        const handlePublishNews = async () => {
+            const newsInput = document.getElementById('admin-news-input');
+            const news = newsInput.value.trim();
+            
+            if (!news) {
+                showMessage('start-message', 'Please enter some news text.', true);
+                return;
+            }
+            
+            try {
+                await newsRef.set(news);
+                newsInput.value = '';
+                showMessage('start-message', 'News published successfully!', false);
+            } catch (error) {
+                console.error("Error publishing news:", error);
+                showMessage('start-message', 'Failed to publish news.', true);
+            }
+        };
+
+        const handleClearNews = async () => {
+            if (confirm("Are you sure you want to clear all news?")) {
+                try {
+                    await newsRef.remove();
+                    showMessage('start-message', 'News cleared successfully!', false);
+                } catch (error) {
+                    console.error("Error clearing news:", error);
+                    showMessage('start-message', 'Failed to clear news.', true);
+                }
+            }
+        };
+
+        // ==================== FIREBASE REALTIME UPDATES ====================
+        const setupRealtimeListener = () => {
+            // Listen for tournament updates
+            tournamentRef.on('value', (snapshot) => {
+                tournamentData = snapshot.val();
+                
+                if (tournamentData) {
+                    // Update all tabs with new data
+                    renderFixtures(tournamentData);
+                    renderPointsTable(tournamentData);
+                    
+                    if (currentTab === 'stats') {
+                        renderStats(tournamentData);
+                    }
+                    
+                    if (isAdmin && currentTab === 'admin') {
+                        renderAdminManagementPanel(tournamentData);
+                        renderAdminResultsContent(tournamentData);
+                    }
+                } else {
+                    // Clear displays if no tournament
+                    renderFixtures(null);
+                    renderPointsTable(null);
+                    
+                    if (isAdmin && currentTab === 'admin') {
+                        document.getElementById('current-tournament-status').innerHTML = `
+                            <div class="text-center py-8">
+                                <p class="text-gray-400">No active tournament found.</p>
+                            </div>
+                        `;
+                    }
+                }
+            });
+            
+            // Listen for news updates
+            newsRef.on('value', (snapshot) => {
+                const news = snapshot.val();
+                const ticker = document.getElementById('news-ticker');
+                
+                if (news && news.trim()) {
+                    ticker.classList.remove('hidden');
+                    ticker.querySelector('.news-content').innerHTML = news;
+                } else {
+                    ticker.classList.add('hidden');
+                }
+            });
+            
+            // Listen for stats updates
+            statsRef.on('value', (snapshot) => {
+                advancedStats = snapshot.val() || {};
+                if (currentTab === 'stats' && tournamentData) {
+                    renderStats(tournamentData);
+                }
+            });
+        };
+
+        const renderAdminManagementPanel = (tournament) => {
+            const container = document.getElementById('current-tournament-status');
+            
+            if (!tournament) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <p class="text-gray-400">No active tournament found.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const standingsResult = calculateStandings(tournament.teams, tournament.schedule);
+            const standings = standingsResult.overall;
+            const matchesPlayed = standings.reduce((sum, t) => sum + t.P, 0) / 2;
+            const totalMatches = tournament.schedule.reduce((sum, r) => sum + r.matches.length, 0);
+            const progress = totalMatches > 0 ? ((matchesPlayed / totalMatches) * 100).toFixed(0) : 0;
+            const firstPlace = standings.length > 0 ? standings[0].team : 'N/A';
+
+            // Calculate Estimated End Date
+            const uniqueDates = [...new Set(tournament.schedule.map(r => r.date))].filter(d => d);
+            const estimatedEndDate = uniqueDates.length > 0 ? uniqueDates[uniqueDates.length - 1] : 'N/A';
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">Tournament Type</div>
+                        <div class="text-lg font-bold text-accent">${tournament.type === 'league' ? 'League' : 'Group & Knockout'}</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">Teams</div>
+                        <div class="text-lg font-bold text-accent">${tournament.teams.length}</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">Total Matches</div>
+                        <div class="text-lg font-bold text-accent">${totalMatches}</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">Matches Played</div>
+                        <div class="text-lg font-bold text-accent">${matchesPlayed}</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">Current Leader</div>
+                        <div class="text-lg font-bold text-accent">${firstPlace}</div>
+                    </div>
+                    <div class="bg-card p-4 rounded-xl">
+                        <div class="text-sm text-gray-400 mb-1">End Date</div>
+                        <div class="text-lg font-bold text-accent">${estimatedEndDate}</div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm text-gray-400 mb-2">
+                        <span>Tournament Progress</span>
+                        <span>${matchesPlayed}/${totalMatches} matches</span>
+                    </div>
+                    <div class="w-full bg-surface rounded-full h-3">
+                        <div class="gradient-bg h-3 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
+                    </div>
+                    <div class="text-center text-sm text-gray-400 mt-2">${progress}% Complete</div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button id="delete-tournament-btn" 
+                        class="px-6 py-3 bg-danger text-white font-semibold rounded-lg hover:bg-danger/80 transition-all duration-300">
+                        <i class="ph ph-trash mr-2"></i> Delete Tournament
+                    </button>
+                </div>
+            `;
+            
+            // Add delete button listener
+            document.getElementById('delete-tournament-btn').addEventListener('click', handleDeleteTournament);
+        };
+
+        const handleDeleteTournament = async () => {
+            if (confirm("Are you sure you want to delete the current tournament and all results?")) {
+                try {
+                    await tournamentRef.remove();
+                    await statsRef.remove();
+                    showMessage('admin-auth-message', 'Tournament successfully deleted.', false);
+                } catch (error) {
+                    console.error("Error deleting tournament:", error);
+                    alert('Failed to delete tournament. Check console.');
+                }
+            }
+        };
+
+        // ==================== START APPLICATION ====================
+        initializeApp();
+        setupRealtimeListener();
     </script>
 </body>
 </html>
