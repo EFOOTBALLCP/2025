@@ -105,7 +105,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('https://i.postimg.cc/7PBj46WL/unnamed-(18).jpg');
+            background-image: url('https://i.postimg.cc/g0RTFQz3/unnamed-(19).jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -119,13 +119,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* BRIGHTER OVERLAY - reduced opacity from 0.9 to 0.7 */
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
         }
         
         .enter-button-container {
             position: absolute;
-            bottom: 15%;  /* MOVED UPWARD from 10% to 15% */
+            bottom: 15%;
             left: 0;
             width: 100%;
             text-align: center;
@@ -137,17 +136,17 @@
             border: none;
             color: transparent;
             cursor: pointer;
-            padding: 30px 60px;  /* INCREASED SIZE */
+            padding: 30px 60px;
             font-size: 0;
             position: relative;
-            width: 300px;  /* INCREASED from 200px to 300px */
-            height: 80px;  /* INCREASED from 60px to 80px */
+            width: 300px;
+            height: 80px;
         }
         
         .hidden-button:hover {
             background: rgba(0, 204, 255, 0.1);
             border-radius: 40px;
-            outline: 3px solid rgba(0, 204, 255, 0.2);  /* Added outline on hover */
+            outline: 3px solid rgba(0, 204, 255, 0.2);
         }
         
         .match-card {
@@ -164,10 +163,10 @@
         }
         
         .match-stat-input {
-            width: 60px;  /* Increased from 50px */
-            height: 36px; /* Increased from 32px */
+            width: 60px;
+            height: 36px;
             text-align: center;
-            font-size: 14px; /* Increased from 12px */
+            font-size: 14px;
             padding: 6px;
             margin: 0 3px;
         }
@@ -651,6 +650,122 @@ Brentford : @asim
             return roundMatches;
         };
 
+        // ========== RESTORED GROUP STAGE & KNOCKOUT LOGIC ==========
+        const generateGroupKnockoutSchedule = (teams, groupsCount, startDateStr) => {
+            // 1. Assign Teams to Groups
+            const groupSize = teams.length / groupsCount;
+            if (groupSize % 1 !== 0) return { schedule: [], groups: {} };
+            
+            const shuffledTeams = shuffleArray([...teams]);
+            const groups = {};
+            for (let i = 0; i < groupsCount; i++) {
+                const groupName = `Group ${String.fromCharCode(65 + i)}`;
+                groups[groupName] = shuffledTeams.slice(i * groupSize, (i + 1) * groupSize);
+            }
+            
+            // 2. Generate Group Stage Matches (Round Robin in each group)
+            let groupStageSchedule = [];
+            
+            for (const groupName in groups) {
+                const groupTeams = groups[groupName];
+                const matches = generateRoundRobinMatches(groupTeams, 0, 1);
+                
+                matches.forEach(round => {
+                    round.matches.forEach(match => {
+                        match.group = groupName;
+                        match.id = `${groupName.replace(/\s/g, '_')}_${match.id}`;
+                    });
+                    
+                    const roundNumber = round.round;
+                    const existingRound = groupStageSchedule.find(r => r.round === roundNumber);
+                    
+                    const matchesToUse = round.matches.filter(m => m.home && m.away);
+
+                    if (existingRound) {
+                        existingRound.matches.push(...matchesToUse);
+                    } else {
+                        groupStageSchedule.push({ 
+                            round: roundNumber, 
+                            matches: matchesToUse
+                        });
+                    }
+                });
+            }
+            
+            // Sort group stage schedule by round number
+            groupStageSchedule.sort((a, b) => a.round - b.round);
+            
+            // Assign dates to group stage (one round per day)
+            let currentDate = new Date(startDateStr);
+            const groupStageDated = [];
+            
+            groupStageSchedule.forEach((round, index) => {
+                const date = new Date(currentDate);
+                date.setDate(date.getDate() + index);
+                groupStageDated.push({
+                    ...round,
+                    date: date.toISOString().split('T')[0]
+                });
+            });
+
+            // 3. Prepare Knockout Template
+            let knockoutScheduleTemplate = [];
+            let qualifyingTeamsCount;
+            let koRoundCounter = groupStageDated.length > 0 ? groupStageDated[groupStageDated.length - 1].round : 0;
+
+            if (teams.length >= 16) {
+                qualifyingTeamsCount = 8;
+                knockoutScheduleTemplate = [
+                    { round: ++koRoundCounter, name: 'Quarter-Finals', matches: 4 },
+                    { round: ++koRoundCounter, name: 'Semi-Finals', matches: 2 },
+                    { round: ++koRoundCounter, name: 'Final', matches: 1 }
+                ];
+            } else {
+                qualifyingTeamsCount = 4;
+                knockoutScheduleTemplate = [
+                    { round: ++koRoundCounter, name: 'Semi-Finals', matches: 2 },
+                    { round: ++koRoundCounter, name: 'Final', matches: 1 }
+                ];
+            }
+            
+            let matchIdCounter = 0;
+            const lastGroupMatchDate = groupStageDated.length > 0 ? 
+                groupStageDated[groupStageDated.length - 1].date : startDateStr;
+            let knockoutDate = new Date(lastGroupMatchDate);
+            knockoutDate.setDate(knockoutDate.getDate() + 1);
+            
+            knockoutScheduleTemplate.forEach(roundTemplate => {
+                const matches = [];
+                const stageName = roundTemplate.name;
+                for (let i = 0; i < roundTemplate.matches; i++) {
+                    const matchName = roundTemplate.matches > 1 ? `${stageName} Match ${i + 1}` : 'Final';
+                    matches.push({
+                        id: `KNOCKOUT-${roundTemplate.round}-${matchIdCounter++}`,
+                        home: `Winner of ${matchName} Home`,
+                        away: `Winner of ${matchName} Away`,
+                        homeScore: null,
+                        awayScore: null,
+                        homePasses: null,
+                        homeTackles: null,
+                        homeSaves: null,
+                        awayPasses: null,
+                        awayTackles: null,
+                        awaySaves: null,
+                        group: stageName,
+                        knockout: true
+                    });
+                }
+                groupStageDated.push({
+                    round: roundTemplate.round,
+                    date: knockoutDate.toISOString().split('T')[0],
+                    matches: matches
+                });
+                knockoutDate.setDate(knockoutDate.getDate() + 1);
+            });
+
+            return { schedule: groupStageDated, groups: groups, qualifiers: qualifyingTeamsCount };
+        };
+
         const generateLeagueSchedule = (teams, numRounds, startDateStr) => {
             let fullSchedule = [];
             const roundsPerBlock = teams.length - (teams.length % 2 === 0 ? 1 : 0);
@@ -669,25 +784,25 @@ Brentford : @asim
                     
                     fullSchedule.push({ 
                         round: round.round, 
-                        matches: matches,
-                        date: startDateStr
+                        matches: matches
                     });
                 });
             }
             
-            // Assign dates (simplified)
-            const dates = [];
+            // Assign dates (one round per day)
             let currentDate = new Date(startDateStr);
-            for (let i = 0; i < fullSchedule.length; i++) {
-                if (i > 0) currentDate.setDate(currentDate.getDate() + 1);
-                dates.push(currentDate.toISOString().split('T')[0]);
-            }
+            const datedSchedule = [];
             
             fullSchedule.forEach((round, index) => {
-                round.date = dates[index] || startDateStr;
+                const date = new Date(currentDate);
+                date.setDate(date.getDate() + index);
+                datedSchedule.push({
+                    ...round,
+                    date: date.toISOString().split('T')[0]
+                });
             });
             
-            return fullSchedule;
+            return datedSchedule;
         };
 
         // ========== ADMIN FUNCTIONS ==========
@@ -751,35 +866,23 @@ Brentford : @asim
             let scheduleData;
             let groupsData = null;
             let numRounds = 0;
+            let knockoutQualifiers = 0;
 
             if (type === 'league') {
                 numRounds = parseInt(document.getElementById('num-rounds').value);
                 scheduleData = generateLeagueSchedule(teams, numRounds, startDateStr);
             } else {
                 const groupsCount = parseInt(document.getElementById('groups-count').value);
-                if (teamsCount % groupsCount !== 0) {
+                if (teamsCount % groupsCount !== 0 || groupsCount < 1) {
                     showMessage('start-message', 'Teams must be evenly divisible by number of groups.', true);
                     return;
                 }
                 
-                // Simplified group stage generation
-                const groupSize = teamsCount / groupsCount;
-                groupsData = {};
-                scheduleData = [];
-                
-                const shuffledTeams = shuffleArray([...teams]);
-                
-                for (let i = 0; i < groupsCount; i++) {
-                    const groupName = `Group ${String.fromCharCode(65 + i)}`;
-                    groupsData[groupName] = shuffledTeams.slice(i * groupSize, (i + 1) * groupSize);
-                    
-                    // Generate matches for this group
-                    const groupMatches = generateRoundRobinMatches(groupsData[groupName], 0, 1);
-                    groupMatches.forEach(match => {
-                        match.matches.forEach(m => m.group = groupName);
-                        scheduleData.push(match);
-                    });
-                }
+                const knockoutResult = generateGroupKnockoutSchedule(teams, groupsCount, startDateStr);
+                scheduleData = knockoutResult.schedule;
+                groupsData = knockoutResult.groups;
+                knockoutQualifiers = knockoutResult.qualifiers;
+                activeGroup = Object.keys(groupsData).sort()[0] || null;
             }
 
             const tournamentDataToSave = {
@@ -788,6 +891,7 @@ Brentford : @asim
                 players: players,
                 groups: groupsData,
                 numRoundsPerTeam: numRounds,
+                knockoutQualifiers: knockoutQualifiers,
                 startDate: startDateStr,
                 schedule: scheduleData,
                 organizerId: "ADMIN_USER",
@@ -869,7 +973,7 @@ Brentford : @asim
         };
 
         // ========== STATISTICS CALCULATIONS ==========
-        const calculateStandings = (teams, scheduleData) => {
+        const calculateStandings = (teams, scheduleData, groups = {}) => {
             const standings = {};
             const stats = {
                 passes: {},
@@ -877,10 +981,22 @@ Brentford : @asim
                 saves: {}
             };
 
-            // Initialize standings
+            // Initialize standings with group information
             teams.forEach(team => {
+                // Find which group this team belongs to
+                let groupName = 'Overall';
+                if (groups) {
+                    for (const group in groups) {
+                        if (groups[group].includes(team)) {
+                            groupName = group;
+                            break;
+                        }
+                    }
+                }
+                
                 standings[team] = {
                     team: team,
+                    group: groupName,
                     P: 0, W: 0, D: 0, L: 0,
                     GF: 0, GA: 0, GD: 0, Pts: 0,
                     passes: 0,
@@ -971,7 +1087,7 @@ Brentford : @asim
                 team.GD = team.GF - team.GA;
             });
 
-            // Sort standings
+            // Sort overall standings
             const overallStandings = Object.values(standings).sort((a, b) => {
                 if (b.Pts !== a.Pts) return b.Pts - a.Pts;
                 if (b.GD !== a.GD) return b.GD - a.GD;
@@ -979,16 +1095,25 @@ Brentford : @asim
                 return a.team.localeCompare(b.team);
             });
 
-            // Group standings
+            // Group standings - FIXED: Properly group by team.group property
             const standingsByGroup = {};
             overallStandings.forEach(team => {
-                if (team.group) {
-                    if (!standingsByGroup[team.group]) {
-                        standingsByGroup[team.group] = [];
-                    }
-                    standingsByGroup[team.group].push(team);
+                const groupName = team.group;
+                if (!standingsByGroup[groupName]) {
+                    standingsByGroup[groupName] = [];
                 }
+                standingsByGroup[groupName].push(team);
             });
+
+            // Sort each group's standings
+            for (const groupName in standingsByGroup) {
+                standingsByGroup[groupName].sort((a, b) => {
+                    if (b.Pts !== a.Pts) return b.Pts - a.Pts;
+                    if (b.GD !== a.GD) return b.GD - a.GD;
+                    if (b.GF !== a.GF) return b.GF - a.GF;
+                    return a.team.localeCompare(b.team);
+                });
+            }
 
             return { 
                 overall: overallStandings, 
@@ -1007,6 +1132,17 @@ Brentford : @asim
             if (news && news.trim() !== "" && visibleTabs.includes(currentTab)) {
                 newsText.innerHTML = news;
                 container.classList.remove('hidden');
+                // Cache news for faster loading
+                localStorage.setItem('tournament_news', news);
+            } else if (visibleTabs.includes(currentTab)) {
+                // Try cached news
+                const cachedNews = localStorage.getItem('tournament_news');
+                if (cachedNews && cachedNews.trim() !== "") {
+                    newsText.innerHTML = cachedNews;
+                    container.classList.remove('hidden');
+                } else {
+                    container.classList.add('hidden');
+                }
             } else {
                 container.classList.add('hidden');
             }
@@ -1024,12 +1160,12 @@ Brentford : @asim
             
             tournament.schedule.forEach(round => {
                 const isKnockout = round.matches.some(m => m.knockout);
-                const roundType = isKnockout ? 'Knockout' : (round.matches[0]?.group ? 'Group' : 'League');
+                const roundType = isKnockout ? 'Knockout' : (round.matches[0]?.group ? 'Group Stage' : 'League');
                 
                 html += `
                     <div class="bg-blue-900/30 p-4 rounded-xl mb-6">
                         <h4 class="text-lg font-bold text-blue-200 mb-4">
-                            Matchday ${round.round} (${round.date}) - ${roundType}
+                            ${isKnockout ? round.matches[0]?.group : 'Matchday'} ${round.round} (${round.date}) - ${roundType}
                         </h4>
                         <div class="space-y-3">
                 `;
@@ -1134,7 +1270,7 @@ Brentford : @asim
                 return;
             }
 
-            const standings = calculateStandings(tournament.teams, tournament.schedule);
+            const standings = calculateStandings(tournament.teams, tournament.schedule, tournament.groups);
             const totalMatches = tournament.schedule.reduce((sum, r) => sum + r.matches.length, 0);
             const matchesPlayed = standings.overall.reduce((sum, t) => sum + t.P, 0) / 2;
             const progress = totalMatches > 0 ? ((matchesPlayed / totalMatches) * 100).toFixed(0) : 0;
@@ -1144,7 +1280,7 @@ Brentford : @asim
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div class="bg-blue-900/30 p-4 rounded-lg">
                         <div class="text-sm text-blue-300">Type</div>
-                        <div class="text-lg font-bold text-white">${tournament.type === 'league' ? 'League' : 'Group Stage'}</div>
+                        <div class="text-lg font-bold text-white">${tournament.type === 'league' ? 'League' : 'Group Stage + Knockout'}</div>
                     </div>
                     <div class="bg-blue-900/30 p-4 rounded-lg">
                         <div class="text-sm text-blue-300">Teams</div>
@@ -1191,8 +1327,10 @@ Brentford : @asim
             });
         };
 
+        // ========== RESTORED FIXTURES DISPLAY WITH GROUP WISE TABS ==========
         const renderFixtures = (tournament) => {
             const container = document.getElementById('fixtures-content');
+            const tabContainer = document.getElementById('group-tabs-container');
             const header = document.getElementById('fixtures-header');
             
             if (!tournament || !tournament.schedule) {
@@ -1202,79 +1340,285 @@ Brentford : @asim
                         <p class="text-xl text-blue-200">Tournament fixtures will appear here once the schedule is generated.</p>
                     </div>
                 `;
+                tabContainer.classList.add('hidden');
                 return;
             }
 
             const players = tournament.players || {};
-            let html = '';
             
-            tournament.schedule.forEach((round, index) => {
-                const roundType = round.matches[0]?.group ? 'Group Stage' : 'League Round';
+            if (tournament.type === 'league') {
+                // LEAGUE FIXTURES - No group tabs
+                tabContainer.classList.add('hidden');
+                header.innerHTML = `<i class="ph-bold ph-calendar-check text-2xl mr-3 text-ucl-accent"></i> League Fixtures`;
                 
-                html += `
-                    <div class="match-card p-6 mb-6 w-full">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                            <h3 class="text-xl font-bold text-white">
-                                Matchday ${round.round} - ${roundType}
-                            </h3>
-                            <span class="text-blue-300 font-semibold bg-blue-900/50 px-4 py-2 rounded-full">${round.date}</span>
-                        </div>
-                        <div class="space-y-4">
-                `;
-                
-                round.matches.forEach(match => {
-                    const homePlayer = getPlayerName(match.home, players);
-                    const awayPlayer = getPlayerName(match.away, players);
-                    
-                    // FIX: Show "NA" when score is null/undefined
-                    const homeScore = match.homeScore !== null && match.homeScore !== undefined ? match.homeScore : 'NA';
-                    const awayScore = match.awayScore !== null && match.awayScore !== undefined ? match.awayScore : 'NA';
-                    
-                    const scoreDisplay = match.homeScore !== null && match.homeScore !== undefined ? 
-                        `<span class="text-2xl font-bold text-white">${homeScore} - ${awayScore}</span>` :
-                        '<span class="text-2xl font-bold text-yellow-400">NA - NA</span>';
-                    
-                    const matchStatus = match.homeScore !== null && match.homeScore !== undefined ? 
-                        'border-green-500/30 bg-green-500/10' : 
-                        'border-blue-500/30 bg-blue-500/10';
-                    
+                let html = '';
+                tournament.schedule.forEach((round, index) => {
                     html += `
-                        <div class="flex flex-col sm:flex-row items-center justify-between p-4 rounded-xl border-2 ${matchStatus} gap-4">
-                            <div class="flex items-center flex-1 w-full sm:w-auto">
-                                <div class="flex-shrink-0 mr-3">
-                                    ${getTeamLogoHtml(match.home, 'w-10 h-10')}
+                        <div class="match-card p-6 mb-6 w-full">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                                <h3 class="text-xl font-bold text-white">
+                                    Matchday ${round.round} - League Round
+                                </h3>
+                                <span class="text-blue-300 font-semibold bg-blue-900/50 px-4 py-2 rounded-full">${round.date}</span>
+                            </div>
+                            <div class="space-y-4">
+                    `;
+                    
+                    round.matches.forEach(match => {
+                        const homePlayer = getPlayerName(match.home, players);
+                        const awayPlayer = getPlayerName(match.away, players);
+                        
+                        const homeScore = match.homeScore !== null && match.homeScore !== undefined ? match.homeScore : 'NA';
+                        const awayScore = match.awayScore !== null && match.awayScore !== undefined ? match.awayScore : 'NA';
+                        
+                        const scoreDisplay = match.homeScore !== null && match.homeScore !== undefined ? 
+                            `<span class="text-2xl font-bold text-white">${homeScore} - ${awayScore}</span>` :
+                            '<span class="text-2xl font-bold text-yellow-400">NA - NA</span>';
+                        
+                        const matchStatus = match.homeScore !== null && match.homeScore !== undefined ? 
+                            'border-green-500/30 bg-green-500/10' : 
+                            'border-blue-500/30 bg-blue-500/10';
+                        
+                        html += `
+                            <div class="flex flex-col sm:flex-row items-center justify-between p-4 rounded-xl border-2 ${matchStatus} gap-4">
+                                <div class="flex items-center flex-1 w-full sm:w-auto">
+                                    <div class="flex-shrink-0 mr-3">
+                                        ${getTeamLogoHtml(match.home, 'w-10 h-10')}
+                                    </div>
+                                    <div class="min-w-0">
+                                        <div class="font-bold text-white team-name">${match.home}</div>
+                                        <div class="text-sm text-blue-300 truncate">${homePlayer}</div>
+                                    </div>
                                 </div>
-                                <div class="min-w-0">
-                                    <div class="font-bold text-white team-name">${match.home}</div>
-                                    <div class="text-sm text-blue-300 truncate">${homePlayer}</div>
+                                
+                                <div class="mx-0 sm:mx-6 text-center my-2 sm:my-0">
+                                    ${scoreDisplay}
+                                </div>
+                                
+                                <div class="flex items-center flex-1 w-full sm:w-auto justify-end sm:justify-start">
+                                    <div class="text-right sm:text-left min-w-0">
+                                        <div class="font-bold text-white team-name">${match.away}</div>
+                                        <div class="text-sm text-blue-300 truncate">${awayPlayer}</div>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-3">
+                                        ${getTeamLogoHtml(match.away, 'w-10 h-10')}
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="mx-0 sm:mx-6 text-center my-2 sm:my-0">
-                                ${scoreDisplay}
-                                ${match.group ? `<div class="text-xs text-blue-400 mt-1">${match.group}</div>` : ''}
-                            </div>
-                            
-                            <div class="flex items-center flex-1 w-full sm:w-auto justify-end sm:justify-start">
-                                <div class="text-right sm:text-left min-w-0">
-                                    <div class="font-bold text-white team-name">${match.away}</div>
-                                    <div class="text-sm text-blue-300 truncate">${awayPlayer}</div>
-                                </div>
-                                <div class="flex-shrink-0 ml-3">
-                                    ${getTeamLogoHtml(match.away, 'w-10 h-10')}
-                                </div>
-                            </div>
+                        `;
+                    });
+                    
+                    html += `</div></div>`;
+                });
+                
+                container.innerHTML = html;
+                
+            } else if (tournament.type === 'group_knockout' && tournament.groups) {
+                // GROUP STAGE + KNOCKOUT FIXTURES - With group tabs
+                tabContainer.classList.remove('hidden');
+                header.innerHTML = `<i class="ph-bold ph-calendar-check text-2xl mr-3 text-ucl-accent"></i> Tournament Fixtures`;
+                
+                const groups = Object.keys(tournament.groups).sort();
+                
+                // Initialize activeGroup if not set
+                if (!activeGroup || !groups.includes(activeGroup)) {
+                    activeGroup = groups[0];
+                }
+                
+                // Render group tabs
+                let tabsHtml = '<div class="flex flex-wrap justify-center sm:justify-start gap-2">';
+                groups.forEach(groupName => {
+                    const isActive = groupName === activeGroup;
+                    const tabClass = isActive ? 
+                        'bg-ucl-highlight text-white border-ucl-highlight' : 
+                        'bg-blue-900/50 text-blue-300 border-transparent hover:bg-blue-900';
+                    
+                    tabsHtml += `
+                        <div data-group="${groupName}" class="group-tab-button py-2 px-4 rounded-lg text-sm font-semibold border-2 ${tabClass} transition duration-150 cursor-pointer">
+                            ${groupName}
                         </div>
                     `;
                 });
+                tabsHtml += '</div>';
+                tabContainer.innerHTML = tabsHtml;
                 
-                html += `</div></div>`;
-            });
-            
-            container.innerHTML = html;
+                // Add event listeners to group tabs
+                document.querySelectorAll('.group-tab-button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const newGroup = e.currentTarget.getAttribute('data-group');
+                        if (newGroup !== activeGroup) {
+                            activeGroup = newGroup;
+                            renderFixtures(tournament);
+                        }
+                    });
+                });
+                
+                // Render fixtures for selected group
+                let html = '';
+                
+                // GROUP STAGE FIXTURES
+                const groupMatches = tournament.schedule.filter(round => 
+                    round.matches.some(match => match.group === activeGroup && !match.knockout)
+                );
+                
+                if (groupMatches.length > 0) {
+                    html += `
+                        <div class="match-card p-6 mb-6 w-full">
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                <i class="ph-bold ph-users-three mr-3 text-ucl-accent"></i> ${activeGroup} Fixtures
+                            </h3>
+                            <div class="space-y-6">
+                    `;
+                    
+                    groupMatches.forEach(round => {
+                        const matchesInGroup = round.matches.filter(m => m.group === activeGroup && !m.knockout);
+                        if (matchesInGroup.length === 0) return;
+                        
+                        html += `
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-blue-300 mb-4">
+                                    Matchday ${round.round} - ${round.date}
+                                </h4>
+                                <div class="space-y-4">
+                        `;
+                        
+                        matchesInGroup.forEach(match => {
+                            const homePlayer = getPlayerName(match.home, players);
+                            const awayPlayer = getPlayerName(match.away, players);
+                            
+                            const homeScore = match.homeScore !== null && match.homeScore !== undefined ? match.homeScore : 'NA';
+                            const awayScore = match.awayScore !== null && match.awayScore !== undefined ? match.awayScore : 'NA';
+                            
+                            const scoreDisplay = match.homeScore !== null && match.homeScore !== undefined ? 
+                                `<span class="text-2xl font-bold text-white">${homeScore} - ${awayScore}</span>` :
+                                '<span class="text-2xl font-bold text-yellow-400">NA - NA</span>';
+                            
+                            const matchStatus = match.homeScore !== null && match.homeScore !== undefined ? 
+                                'border-green-500/30 bg-green-500/10' : 
+                                'border-blue-500/30 bg-blue-500/10';
+                            
+                            html += `
+                                <div class="flex flex-col sm:flex-row items-center justify-between p-4 rounded-xl border-2 ${matchStatus} gap-4">
+                                    <div class="flex items-center flex-1 w-full sm:w-auto">
+                                        <div class="flex-shrink-0 mr-3">
+                                            ${getTeamLogoHtml(match.home, 'w-10 h-10')}
+                                        </div>
+                                        <div class="min-w-0">
+                                            <div class="font-bold text-white team-name">${match.home}</div>
+                                            <div class="text-sm text-blue-300 truncate">${homePlayer}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mx-0 sm:mx-6 text-center my-2 sm:my-0">
+                                        ${scoreDisplay}
+                                    </div>
+                                    
+                                    <div class="flex items-center flex-1 w-full sm:w-auto justify-end sm:justify-start">
+                                        <div class="text-right sm:text-left min-w-0">
+                                            <div class="font-bold text-white team-name">${match.away}</div>
+                                            <div class="text-sm text-blue-300 truncate">${awayPlayer}</div>
+                                        </div>
+                                        <div class="flex-shrink-0 ml-3">
+                                            ${getTeamLogoHtml(match.away, 'w-10 h-10')}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        html += `</div></div>`;
+                    });
+                    
+                    html += `</div></div>`;
+                } else {
+                    html += `<div class="text-center py-8 text-blue-300">No fixtures available for ${activeGroup}</div>`;
+                }
+                
+                // KNOCKOUT STAGE FIXTURES
+                const knockoutRounds = tournament.schedule.filter(round => 
+                    round.matches.some(match => match.knockout)
+                );
+                
+                if (knockoutRounds.length > 0) {
+                    html += `
+                        <div class="match-card p-6 mb-6 w-full border-2 border-green-500/30">
+                            <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                                <i class="ph-bold ph-trophy mr-3 text-green-400"></i> Knockout Stage
+                            </h3>
+                            <div class="space-y-6">
+                    `;
+                    
+                    knockoutRounds.forEach(round => {
+                        const knockoutMatches = round.matches.filter(m => m.knockout);
+                        if (knockoutMatches.length === 0) return;
+                        
+                        const roundName = knockoutMatches[0].group;
+                        
+                        html += `
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-green-400 mb-4 flex items-center">
+                                    <i class="ph-bold ph-crown mr-2"></i> ${roundName} - ${round.date}
+                                </h4>
+                                <div class="space-y-4">
+                        `;
+                        
+                        knockoutMatches.forEach(match => {
+                            const homePlayer = getPlayerName(match.home, players);
+                            const awayPlayer = getPlayerName(match.away, players);
+                            
+                            const homeScore = match.homeScore !== null && match.homeScore !== undefined ? match.homeScore : 'NA';
+                            const awayScore = match.awayScore !== null && match.awayScore !== undefined ? match.awayScore : 'NA';
+                            
+                            const scoreDisplay = match.homeScore !== null && match.homeScore !== undefined ? 
+                                `<span class="text-2xl font-bold text-white">${homeScore} - ${awayScore}</span>` :
+                                '<span class="text-2xl font-bold text-yellow-400">NA - NA</span>';
+                            
+                            const matchStatus = match.homeScore !== null && match.homeScore !== undefined ? 
+                                'border-green-500/30 bg-green-500/20' : 
+                                'border-green-500/30 bg-green-500/10';
+                            
+                            html += `
+                                <div class="flex flex-col sm:flex-row items-center justify-between p-4 rounded-xl border-2 ${matchStatus} gap-4">
+                                    <div class="flex items-center flex-1 w-full sm:w-auto">
+                                        <div class="flex-shrink-0 mr-3">
+                                            ${getTeamLogoHtml(match.home, 'w-10 h-10')}
+                                        </div>
+                                        <div class="min-w-0">
+                                            <div class="font-bold text-white team-name">${match.home}</div>
+                                            <div class="text-sm text-green-300 truncate">${homePlayer}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mx-0 sm:mx-6 text-center my-2 sm:my-0">
+                                        ${scoreDisplay}
+                                        <div class="text-xs text-green-400 mt-1">${roundName}</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center flex-1 w-full sm:w-auto justify-end sm:justify-start">
+                                        <div class="text-right sm:text-left min-w-0">
+                                            <div class="font-bold text-white team-name">${match.away}</div>
+                                            <div class="text-sm text-green-300 truncate">${awayPlayer}</div>
+                                        </div>
+                                        <div class="flex-shrink-0 ml-3">
+                                            ${getTeamLogoHtml(match.away, 'w-10 h-10')}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        html += `</div></div>`;
+                    });
+                    
+                    html += `</div></div>`;
+                }
+                
+                container.innerHTML = html;
+            }
         };
 
-        const renderPointsTable = (standingsResult, players, tournamentType) => {
+        // ========== UPDATED POINTS TABLE FUNCTION (GROUP-WISE FOR GROUP STAGE) ==========
+        const renderPointsTable = (standingsResult, players, tournamentType, groups = {}) => {
             const container = document.getElementById('points-table-content');
             const header = document.getElementById('points-header');
             
@@ -1288,70 +1632,191 @@ Brentford : @asim
                 return;
             }
 
-            header.innerHTML = `
-                <i class="ph-bold ph-list-numbers text-2xl mr-3 text-ucl-accent"></i> 
-                ${tournamentType === 'league' ? 'League Standings' : 'Group Stage Standings'}
-            `;
-
-            const standings = standingsResult.overall;
-            
-            let html = `
-                <div class="overflow-x-auto">
-                    <table class="w-full border-collapse min-w-[800px]">
-                        <thead>
-                            <tr class="bg-gradient-to-r from-blue-700 to-blue-800">
-                                <th class="p-3 text-left text-white font-bold">#</th>
-                                <th class="p-3 text-left text-white font-bold">Team</th>
-                                <th class="p-3 text-center text-white font-bold">P</th>
-                                <th class="p-3 text-center text-white font-bold">W</th>
-                                <th class="p-3 text-center text-white font-bold">D</th>
-                                <th class="p-3 text-center text-white font-bold">L</th>
-                                <th class="p-3 text-center text-white font-bold">GF</th>
-                                <th class="p-3 text-center text-white font-bold">GA</th>
-                                <th class="p-3 text-center text-white font-bold">GD</th>
-                                <th class="p-3 text-center text-white font-bold">Pts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-            `;
-            
-            standings.forEach((team, index) => {
-                const isTop4 = index < 4;
-                const rowClass = isTop4 ? 'bg-green-500/10' : 'hover:bg-blue-900/30';
-                const playerName = players[team.team] || '';
+            // For group stage tournaments, show group-wise tables
+            if (tournamentType === 'group_knockout' && groups && Object.keys(groups).length > 0) {
+                header.innerHTML = `<i class="ph-bold ph-list-numbers text-2xl mr-3 text-ucl-accent"></i> Group Stage Standings`;
                 
-                html += `
-                    <tr class="border-b border-blue-800/50 ${rowClass}">
-                        <td class="p-3">
-                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full ${isTop4 ? 'bg-green-500 text-white' : 'bg-blue-900 text-blue-300'} font-bold">
-                                ${index + 1}
-                            </span>
-                        </td>
-                        <td class="p-3">
-                            <div class="flex items-center">
-                                ${getTeamLogoHtml(team.team, 'w-8 h-8')}
-                                <div class="ml-3 min-w-0">
-                                    <div class="font-bold text-white truncate">${team.team}</div>
-                                    <div class="text-xs text-blue-300 truncate">${playerName}</div>
-                                </div>
+                let html = '';
+                const groupNames = Object.keys(groups).sort();
+                
+                groupNames.forEach(groupName => {
+                    const groupTeams = groups[groupName];
+                    const groupStandings = standingsResult.byGroup[groupName] || [];
+                    
+                    // If no standings for this group, create empty standings
+                    if (groupStandings.length === 0) {
+                        groupTeams.forEach(team => {
+                            groupStandings.push({
+                                team: team,
+                                group: groupName,
+                                P: 0, W: 0, D: 0, L: 0,
+                                GF: 0, GA: 0, GD: 0, Pts: 0
+                            });
+                        });
+                    }
+                    
+                    // Sort the group standings
+                    groupStandings.sort((a, b) => {
+                        if (b.Pts !== a.Pts) return b.Pts - a.Pts;
+                        if (b.GD !== a.GD) return b.GD - a.GD;
+                        if (b.GF !== a.GF) return b.GF - a.GF;
+                        return a.team.localeCompare(b.team);
+                    });
+                    
+                    html += `
+                        <div class="mb-10">
+                            <h3 class="text-xl font-bold text-white section-header-bg p-4 rounded-xl mb-6 flex items-center">
+                                <i class="ph-bold ph-users-three mr-3 text-ucl-accent"></i> ${groupName} Standings
+                                <span class="ml-auto text-sm font-normal text-blue-200">
+                                    ${groupTeams.length} teams
+                                </span>
+                            </h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse min-w-[800px] mb-6">
+                                    <thead>
+                                        <tr class="bg-gradient-to-r from-blue-700 to-blue-800">
+                                            <th class="p-3 text-left text-white font-bold">#</th>
+                                            <th class="p-3 text-left text-white font-bold">Team</th>
+                                            <th class="p-3 text-center text-white font-bold">P</th>
+                                            <th class="p-3 text-center text-white font-bold hidden sm:table-cell">W</th>
+                                            <th class="p-3 text-center text-white font-bold hidden sm:table-cell">D</th>
+                                            <th class="p-3 text-center text-white font-bold hidden sm:table-cell">L</th>
+                                            <th class="p-3 text-center text-white font-bold">GF</th>
+                                            <th class="p-3 text-center text-white font-bold">GA</th>
+                                            <th class="p-3 text-center text-white font-bold">GD</th>
+                                            <th class="p-3 text-center text-white font-bold">Pts</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    `;
+                    
+                    groupStandings.forEach((team, index) => {
+                        const isQualifying = index < 2; // Top 2 qualify
+                        const rowClass = isQualifying ? 'bg-green-500/20' : 'hover:bg-blue-900/30';
+                        const playerName = players[team.team] || '';
+                        
+                        html += `
+                            <tr class="border-b border-blue-800/50 ${rowClass}">
+                                <td class="p-3">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full ${isQualifying ? 'bg-green-500 text-white' : 'bg-blue-900 text-blue-300'} font-bold">
+                                        ${index + 1}
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex items-center">
+                                        ${getTeamLogoHtml(team.team, 'w-8 h-8')}
+                                        <div class="ml-3 min-w-0">
+                                            <div class="font-bold text-white truncate">${team.team}</div>
+                                            <div class="text-xs text-blue-300 truncate">${playerName}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="p-3 text-center font-bold">${team.P}</td>
+                                <td class="p-3 text-center text-green-400 font-bold hidden sm:table-cell">${team.W}</td>
+                                <td class="p-3 text-center text-yellow-400 font-bold hidden sm:table-cell">${team.D}</td>
+                                <td class="p-3 text-center text-red-400 font-bold hidden sm:table-cell">${team.L}</td>
+                                <td class="p-3 text-center font-bold">${team.GF}</td>
+                                <td class="p-3 text-center font-bold">${team.GA}</td>
+                                <td class="p-3 text-center font-bold ${team.GD > 0 ? 'text-green-400' : team.GD < 0 ? 'text-red-400' : 'text-yellow-400'}">
+                                    ${team.GD > 0 ? '+' : ''}${team.GD}
+                                </td>
+                                <td class="p-3 text-center font-bold text-2xl text-ucl-accent">${team.Pts}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    html += `</tbody></table></div>`;
+                    
+                    // Add qualification info
+                    html += `
+                        <div class="mt-4 p-3 bg-blue-900/30 rounded-lg border border-blue-700/50">
+                            <div class="flex items-center text-sm text-blue-300">
+                                <i class="ph-bold ph-info mr-2"></i>
+                                <span>Top 2 teams <span class="text-green-400 font-semibold">(highlighted in green)</span> qualify for knockout stage</span>
                             </div>
-                        </td>
-                        <td class="p-3 text-center font-bold">${team.P}</td>
-                        <td class="p-3 text-center text-green-400 font-bold">${team.W}</td>
-                        <td class="p-3 text-center text-yellow-400 font-bold">${team.D}</td>
-                        <td class="p-3 text-center text-red-400 font-bold">${team.L}</td>
-                        <td class="p-3 text-center font-bold">${team.GF}</td>
-                        <td class="p-3 text-center font-bold">${team.GA}</td>
-                        <td class="p-3 text-center font-bold ${team.GD > 0 ? 'text-green-400' : team.GD < 0 ? 'text-red-400' : 'text-yellow-400'}">
-                            ${team.GD > 0 ? '+' : ''}${team.GD}
-                        </td>
-                        <td class="p-3 text-center font-bold text-2xl text-ucl-accent">${team.Pts}</td>
-                    </tr>
+                        </div>
+                    `;
+                    
+                    html += `</div>`;
+                });
+                
+                container.innerHTML = html;
+                
+            } else {
+                // LEAGUE TOURNAMENT - Single table
+                header.innerHTML = `<i class="ph-bold ph-list-numbers text-2xl mr-3 text-ucl-accent"></i> League Standings`;
+                
+                const standings = standingsResult.overall;
+                
+                let html = `
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-blue-700 to-blue-800">
+                                    <th class="p-3 text-left text-white font-bold">#</th>
+                                    <th class="p-3 text-left text-white font-bold">Team</th>
+                                    <th class="p-3 text-center text-white font-bold">P</th>
+                                    <th class="p-3 text-center text-white font-bold hidden sm:table-cell">W</th>
+                                    <th class="p-3 text-center text-white font-bold hidden sm:table-cell">D</th>
+                                    <th class="p-3 text-center text-white font-bold hidden sm:table-cell">L</th>
+                                    <th class="p-3 text-center text-white font-bold">GF</th>
+                                    <th class="p-3 text-center text-white font-bold">GA</th>
+                                    <th class="p-3 text-center text-white font-bold">GD</th>
+                                    <th class="p-3 text-center text-white font-bold">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                 `;
-            });
-            
-            html += `</tbody></table></div>`;
-            container.innerHTML = html;
+                
+                standings.forEach((team, index) => {
+                    const isTop4 = index < 4;
+                    const rowClass = isTop4 ? 'bg-green-500/20' : 'hover:bg-blue-900/30';
+                    const playerName = players[team.team] || '';
+                    
+                    html += `
+                        <tr class="border-b border-blue-800/50 ${rowClass}">
+                            <td class="p-3">
+                                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full ${isTop4 ? 'bg-green-500 text-white' : 'bg-blue-900 text-blue-300'} font-bold">
+                                    ${index + 1}
+                                </span>
+                            </td>
+                            <td class="p-3">
+                                <div class="flex items-center">
+                                    ${getTeamLogoHtml(team.team, 'w-8 h-8')}
+                                    <div class="ml-3 min-w-0">
+                                        <div class="font-bold text-white truncate">${team.team}</div>
+                                        <div class="text-xs text-blue-300 truncate">${playerName}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-3 text-center font-bold">${team.P}</td>
+                            <td class="p-3 text-center text-green-400 font-bold hidden sm:table-cell">${team.W}</td>
+                            <td class="p-3 text-center text-yellow-400 font-bold hidden sm:table-cell">${team.D}</td>
+                            <td class="p-3 text-center text-red-400 font-bold hidden sm:table-cell">${team.L}</td>
+                            <td class="p-3 text-center font-bold">${team.GF}</td>
+                            <td class="p-3 text-center font-bold">${team.GA}</td>
+                            <td class="p-3 text-center font-bold ${team.GD > 0 ? 'text-green-400' : team.GD < 0 ? 'text-red-400' : 'text-yellow-400'}">
+                                ${team.GD > 0 ? '+' : ''}${team.GD}
+                            </td>
+                            <td class="p-3 text-center font-bold text-2xl text-ucl-accent">${team.Pts}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `</tbody></table></div>`;
+                
+                // Add league info
+                html += `
+                    <div class="mt-6 p-4 bg-blue-900/30 rounded-lg border border-blue-700/50">
+                        <div class="flex items-center text-sm text-blue-300">
+                            <i class="ph-bold ph-info mr-2"></i>
+                            <span>Top 4 teams <span class="text-green-400 font-semibold">(highlighted in green)</span> are in Champions League positions</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.innerHTML = html;
+            }
         };
 
         const renderStats = (standingsResult, players) => {
@@ -1534,13 +1999,25 @@ Brentford : @asim
             }
             
             if (tabName === 'stats' && tournamentData) {
-                const standings = calculateStandings(tournamentData.teams, tournamentData.schedule);
+                const standings = calculateStandings(tournamentData.teams, tournamentData.schedule, tournamentData.groups);
                 renderStats(standings, tournamentData.players);
             }
             
-            // Update news strip visibility
+            // Update news strip visibility - Show cached news immediately
+            const cachedNews = localStorage.getItem('tournament_news');
+            if (cachedNews && ['fixtures', 'points', 'stats'].includes(currentTab)) {
+                const newsText = document.getElementById('news-text');
+                const container = document.getElementById('news-strip-container');
+                newsText.innerHTML = cachedNews;
+                container.classList.remove('hidden');
+            }
+            
+            // Also load from Firebase for updates
             newsRef.once('value', snapshot => {
-                renderNewsStrip(snapshot.val());
+                const liveNews = snapshot.val();
+                if (liveNews && liveNews.trim() !== "") {
+                    renderNewsStrip(liveNews);
+                }
             });
         };
 
@@ -1572,6 +2049,7 @@ Brentford : @asim
             
             document.getElementById('clear-news-btn').addEventListener('click', () => {
                 newsRef.remove();
+                localStorage.removeItem('tournament_news');
                 showMessage('start-message', 'News cleared successfully!', false);
             });
             
@@ -1591,11 +2069,11 @@ Brentford : @asim
             tournamentData = snapshot.val();
             
             if (tournamentData) {
-                const standings = calculateStandings(tournamentData.teams, tournamentData.schedule);
+                const standings = calculateStandings(tournamentData.teams, tournamentData.schedule, tournamentData.groups);
                 
                 // Always update visible tabs
                 renderFixtures(tournamentData);
-                renderPointsTable(standings, tournamentData.players, tournamentData.type);
+                renderPointsTable(standings, tournamentData.players, tournamentData.type, tournamentData.groups);
                 
                 // Update admin panel if visible
                 if (isAdmin || currentTab === 'admin') {
