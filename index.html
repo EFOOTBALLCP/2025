@@ -136,12 +136,11 @@
             border-left-color: #3b82f6;
         }
         
-        .stat-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
+     .stat-card {
+    min-width: 100%; /* Make stats cards full width */
+    width: 100%;
+    margin-bottom: 1rem;
+}
         
         .stat-card:hover {
             transform: translateY(-5px);
@@ -663,9 +662,11 @@ Brentford : @asim</textarea>
                             <p class="text-gray-400">Advanced statistics and player performance</p>
                         </div>
                     </div>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Scoring Stats -->
+            <!-- Change from 2 columns to 1 column -->
+<div class="grid grid-cols-1 gap-6">  <!-- Was: grid-cols-1 lg:grid-cols-2 -->
+    <!-- All stat cards will stack vertically -->
+</div>
+                       <!-- Scoring Stats -->
                         <div class="stat-card">
                             <div class="flex items-center mb-4">
                                 <div class="bg-success/20 p-2 rounded-lg mr-3">
